@@ -9,6 +9,8 @@ import java.util.List;
 import com.uniajc.mvn.modelo.Estudiante;
 import com.uniajc.mvn.vista.VistaEstudiante;
 
+// CONTROLADOR
+
 public class ControladorEstudiante {
   private List<Estudiante> estudiantes;
   private VistaEstudiante vista;
