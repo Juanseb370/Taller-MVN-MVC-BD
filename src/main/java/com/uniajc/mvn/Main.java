@@ -16,6 +16,8 @@ import com.uniajc.mvn.vista.VistaProfesor;
 
 
 
+
+
 public class Main {
   public static void main(String[] args) {
 
@@ -23,83 +25,87 @@ public class Main {
 
 
     //----------------------------------------------------------------------------------------------------
-    //descomentar
-   //Scanner scanner = new Scanner(System.in); 
+//     // descomentar
+   Scanner scanner = new Scanner(System.in); 
 
-   //no descomentar
-    // Estudiante estudiante = new Estudiante();
-    // estudiante.setNombre("juan almendra");
-    // estudiante.setEdad(25);
+//    //no descomentar
+//     // Estudiante estudiante = new Estudiante();
+//     // estudiante.setNombre("juan almendra");
+//     // estudiante.setEdad(25);
     
-//descomentar
-    //VistaEstudiante vista = new VistaEstudiante();
+// //descomentar
+    VistaEstudiante vista = new VistaEstudiante();
 
-    //no descomentar
-    // ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
+//     //no descomentar
+//     // ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
 
-    // controlador.agregarEstudiante(estudiante);
-    // controlador.actualizarVista();
-    
-
-
+//     //controlador.agregarEstudiante(estudiante);
+//     //controlador.actualizarVista();
     
 
 
-
-
-
-
-
-    // // CODIGO PARA MANEJAR ESTUDIANTES
-
-    // //AGREGAR ESTUDIANTE DESDE CONSOLA
-
-    // System.out.print("Ingrese el nombre del estudiante: ");
-    // String nombre = scanner.nextLine();
-
-    // System.out.print("Ingrese la edad del estudiante: ");
-    // int edad = scanner.nextInt();
-
-    // scanner.nextLine(); // Consumir el salto de línea pendiente
-
-    // Estudiante estudiante = new Estudiante(nombre, edad,0); // Asignar un ID único, por ejemplo, 0
-    // ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
-    // controlador.agregarEstudiante(estudiante);
-    // controlador.actualizarVista();
-    // // scanner.close();
-    // scanner.nextLine(); // Consumir el salto de línea pendiente
-
-
-
-    // //ACTUALIZAR ESTUDIANTE
-
-    // System.out.print("Ingrese el nombre del estudiante a actualizar: ");
-    // Scanner scanner2 = new Scanner(System.in);
-    // String nombreOriginal = scanner2.nextLine();
-    // System.out.print("Ingrese el nuevo nombre del estudiante: ");
-    // String nuevoNombre = scanner2.nextLine();
-    // System.out.print("Ingrese la nueva edad del estudiante: ");
-    // int nuevaEdad = scanner2.nextInt();
-
-    // scanner.nextLine(); // Consumir el salto de línea pendiente
-
-    // Estudiante estudianteActualizado = new Estudiante(nuevoNombre, nuevaEdad,0);
-    // controlador.actualizarEstudiante(nombreOriginal, estudianteActualizado);
-    // controlador.actualizarVista();
-    // // scanner2.close();
-
-    // scanner2.nextLine(); // Consumir el salto de línea pendiente
     
 
 
-    // //ELIMINAR ESTUDIANTE
-    // System.out.print("Ingrese el nombre del estudiante a eliminar: ");
-    // Scanner scanner3 = new Scanner(System.in);
-    // String nombreAEliminar = scanner3.nextLine();
-    // controlador.eliminarEstudiante(nombreAEliminar);
-    // controlador.actualizarVista();
+
+
+
+
+
+//     // // CODIGO PARA MANEJAR ESTUDIANTES
+
+    //AGREGAR ESTUDIANTE DESDE CONSOLA
+
+    System.out.print("Ingrese el nombre del estudiante: ");
+    String nombre = scanner.nextLine();
+
+    System.out.print("Ingrese la edad del estudiante: ");
+    int edad = scanner.nextInt();
+
+    scanner.nextLine(); // Consumir el salto de línea pendiente
+
+    Estudiante estudiante = new Estudiante(nombre, edad,0); // Asignar un ID único, por ejemplo, 0
+    ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
+    controlador.agregarEstudiante(estudiante);
+    controlador.actualizarVista();
+    // scanner.close();
+    scanner.nextLine(); // Consumir el salto de línea pendiente
+
+
+
+//     //ACTUALIZAR ESTUDIANTE
+
+    System.out.print("Ingrese el nombre del estudiante a actualizar: ");
+    Scanner scanner2 = new Scanner(System.in);
+    String nombreOriginal = scanner2.nextLine();
+    System.out.print("Ingrese el nuevo nombre del estudiante: ");
+    String nuevoNombre = scanner2.nextLine();
+    System.out.print("Ingrese la nueva edad del estudiante: ");
+    int nuevaEdad = scanner2.nextInt();
+
+    scanner.nextLine(); // Consumir el salto de línea pendiente
+
+    Estudiante estudianteActualizado = new Estudiante(nuevoNombre, nuevaEdad,0);
+    controlador.actualizarEstudiante(nombreOriginal, estudianteActualizado);
+    controlador.actualizarVista();
+    // scanner2.close();
+
+    scanner2.nextLine(); // Consumir el salto de línea pendiente
+    
+
+
+//     //ELIMINAR ESTUDIANTE
+    System.out.print("Ingrese el nombre del estudiante a eliminar: ");
+    Scanner scanner3 = new Scanner(System.in);
+    String nombreAEliminar = scanner3.nextLine();
+    controlador.eliminarEstudiante(nombreAEliminar);
+    controlador.actualizarVista();
+
+    scanner3.nextLine(); // Consumir el salto de línea pendiente
     // scanner3.close();
-    // // Cerrar la conexión al final (opcional, ya que el programa termina aquí)
+    // Cerrar la conexión al final (opcional, ya que el programa termina aquí)
+    
+    //descomentar solo para terminar aqui
     // try {
     //   if (conexion != null && !conexion.isClosed()) {
     //     conexion.close();
@@ -114,9 +120,10 @@ public class Main {
 //---------------------------------------------------------------------------------------------------
 
 
-     //AGREGAR PROFESOR DESDE CONSOLA
+     // AGREGAR PROFESOR DESDE CONSOLA
 
     System.out.print("Ingrese el nombre del profesor: ");
+<<<<<<< HEAD
     Scanner scanner = new Scanner(System.in);
     String nombre = scanner.nextLine();
     System.out.print("Ingrese la materia del profesor: ");
@@ -126,6 +133,17 @@ public class Main {
     System.out.println("Profesor agregado: " + profesor.getNombre() + " - Materia: " + profesor.getMateria());
 
     scanner.nextLine(); // Consumir el salto de línea pendiente
+=======
+    Scanner scanner4 = new Scanner(System.in);
+    String nombreP = scanner4.nextLine();
+    System.out.print("Ingrese la materia del profesor: ");
+    String materia = scanner4.nextLine();
+    Profesor profesor = new Profesor(nombreP, materia,0); // Asignar un ID único, por ejemplo, 0
+    Profesor.insertarProfesor(profesor);
+    System.out.println("Profesor agregado: " + profesor.getNombre() + " - Materia: " + profesor.getMateria());
+
+    scanner4.nextLine(); // Consumir el salto de línea pendiente
+>>>>>>> b2d3350 (Revision y Correccion Main.java)
     // ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
     // controlador.agregarEstudiante(estudiante);
     // controlador.actualizarVista();
@@ -133,6 +151,7 @@ public class Main {
     
 
     //ACTUALIZAR PROFESOR DESDE CONSOLA
+<<<<<<< HEAD
     System.out.print("Ingrese el nombre del profesor a actualizar: ");
     Scanner scanner2 = new Scanner(System.in);
     String nombreOriginal = scanner2.nextLine();
@@ -147,18 +166,97 @@ public class Main {
     //controlador.actualizarVistaP();
     // scanner2.close();
     scanner2.nextLine(); // Consumir el salto de línea pendiente
+=======
+
+    System.out.print("Ingrese el nombre del profesor a actualizar: ");
+    Scanner scanner5 = new Scanner(System.in);
+    String nombreOriginalP = scanner5.nextLine();
+    System.out.print("Ingrese el nuevo nombre del profesor: ");
+    String nuevoNombreP = scanner5.nextLine();
+    System.out.print("Ingrese la nueva materia del profesor: ");
+    String nuevaMateria = scanner5.nextLine();
+    scanner5.nextLine(); // Consumir el salto de línea pendiente
+    Profesor profesorActualizado = new Profesor(nuevoNombreP, nuevaMateria,0);
+    Profesor.actualizarProfesor(nombreOriginalP, profesorActualizado);
+    System.out.println("Profesor actualizado: " + profesorActualizado.getNombre() + " - Materia: " + profesorActualizado.getMateria());
+    //controlador.actualizarVistaP();
+    // scanner2.close();
+    scanner5.nextLine(); // Consumir el salto de línea pendiente
+>>>>>>> b2d3350 (Revision y Correccion Main.java)
 
 
   
 
   //ELIMINAR PROFESOR
     System.out.print("Ingrese el nombre del profesor a eliminar: ");
+<<<<<<< HEAD
     Scanner scanner3 = new Scanner(System.in);
     String nombreAEliminar = scanner3.nextLine();
     Profesor.eliminarProfesor(nombreAEliminar);
     System.out.println("Profesor eliminado: " + nombreAEliminar);
+=======
+    Scanner scanner6 = new Scanner(System.in);
+    String nombreAEliminarP = scanner6.nextLine();
+    Profesor.eliminarProfesor(nombreAEliminarP);
+    System.out.println("Profesor eliminado: " + nombreAEliminarP);
+    scanner6.nextLine(); // Consumir el salto de línea pendiente
     //controlador.actualizarVistaP();
-    scanner3.close();
+    //scanner3.close();
+    //Cerrar la conexión al final (opcional, ya que el programa termina aquí)
+    // try {
+    //   if (conexion != null && !conexion.isClosed()) {
+    //     conexion.close();
+    //     System.out.println("Conexión cerrada.");
+    //   }
+    // } catch (Exception e) {
+    //   System.out.println("Error al cerrar la conexión: " + e.getMessage());
+    // }
+
+
+
+    //---------------------------------------------------------------------------------------------------------------
+
+    
+
+
+  //   // AGREGAR CURSO DESDE CONSOLA
+    System.out.print("Ingrese el nombre del curso: ");
+    Scanner scanner7 = new Scanner(System.in);
+    String nombreC = scanner7.nextLine();
+    System.out.print("Ingrese la descripción del curso: ");
+    String descripcion = scanner7.nextLine();
+    Cursos curso = new Cursos(0,nombreC, descripcion); // Asignar un ID único, por ejemplo, 0
+    Cursos.insertarCurso(curso);
+    System.out.println("Curso agregado: " + curso.getNombre() + " - Descripción: " + curso.getDescripcion());
+    scanner7.nextLine(); // Consumir el salto de línea pendiente
+
+    
+    
+    
+  //   //aCTUALIZAR CURSO DESDE CONSOLA
+    System.out.print("Ingrese el nombre del curso a actualizar: ");
+    Scanner scanner8 = new Scanner(System.in);
+    String nombreOriginalC = scanner8.nextLine();
+    System.out.print("Ingrese el nuevo nombre del curso: ");
+    String nuevoNombreC = scanner8.nextLine();
+    System.out.print("Ingrese la nueva descripción del curso: ");
+    String nuevaDescripcion = scanner8.nextLine();
+    scanner8.nextLine(); // Consumir el salto de línea pendiente
+    Cursos cursoActualizado = new Cursos();
+    Cursos.actualizarCurso(nombreOriginalC, cursoActualizado);
+    System.out.println("Curso actualizado: " + cursoActualizado.getNombre() + " - Descripción: " + cursoActualizado.getDescripcion());
+    
+
+
+  //ELIMINAR CURSO
+    System.out.print("Ingrese el nombre del curso a eliminar: ");
+    Scanner scanner9 = new Scanner(System.in);
+    String nombreCursoAEliminar = scanner9.nextLine();
+    Cursos.eliminarCurso(nombreCursoAEliminar);
+    System.out.println("Curso eliminado: " + nombreCursoAEliminar);
+>>>>>>> b2d3350 (Revision y Correccion Main.java)
+    //controlador.actualizarVistaP();
+    scanner9.close();
     //Cerrar la conexión al final (opcional, ya que el programa termina aquí)
     try {
       if (conexion != null && !conexion.isClosed()) {
