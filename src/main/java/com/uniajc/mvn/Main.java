@@ -4,10 +4,17 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 import com.uniajc.mvn.controlador.ControladorEstudiante;
+import com.uniajc.mvn.controlador.ControladorProfesor;
+
 import com.uniajc.mvn.modelo.ConexionDatabase;
+
 import com.uniajc.mvn.modelo.Estudiante;
 import com.uniajc.mvn.modelo.Profesor;
+
 import com.uniajc.mvn.vista.VistaEstudiante;
+import com.uniajc.mvn.vista.VistaProfesor;
+
+
 
 public class Main {
   public static void main(String[] args) {
@@ -142,14 +149,11 @@ public class Main {
   }
 
   //ELIMINAR PROFESOR
-  public static void eliminarProfesor() {
-    System.out.print("Ingrese el nombre del profesor a eliminar: ");
-    Scanner scanner3 = new Scanner(System.in);
-    String nombreAEliminar = scanner3.nextLine();
-    Profesor.eliminarProfesor(nombreAEliminar);
-    // controlador.actualizarVista();
-    scanner3.close();
+  public static void eliminarProfesor(String nombre) {
+    Profesor.eliminarProfesor(nombre);
+    System.out.println("Profesor eliminado: " + nombre);
   }
+
   // Cerrar la conexión al final (opcional, ya que el programa termina aquí)
   public static void cerrarConexion(Connection conexion) {
     try {

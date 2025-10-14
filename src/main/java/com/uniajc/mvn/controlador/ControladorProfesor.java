@@ -6,44 +6,44 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.uniajc.mvn.modelo.Estudiante;
-import com.uniajc.mvn.vista.VistaEstudiante;
+import com.uniajc.mvn.modelo.Profesor;
+import com.uniajc.mvn.vista.VistaProfesor;
 
 // ESTA CLASE ES SIMILAR A ControladorEstudiante PERO PARA PROFESORES
 public class ControladorProfesor {
-    private List<Estudiante> estudiantes;
-    private VistaEstudiante vista;
+    private List<Profesor> profesores;
+    private VistaProfesor vista;
     
 
-    public ControladorProfesor(Estudiante modelo, VistaEstudiante vista) {
+    public ControladorProfesor(Profesor modelo, VistaProfesor vista) {
         this.vista = vista;
-        this.estudiantes = new ArrayList<Estudiante>();
-    }
+        this.profesores = new ArrayList<Profesor>();
+    }   
     //ACTUALIZAR VISTA  
     public void actualizarVista() {
-        List<Estudiante> estudiantes = listarTodosLosProfesores();
+        List<Profesor> profesores = listarTodosLosProfesores();
         //IMPRIMIR EN CONSOLA
-        vista.mostrarDetallesEstudiante(estudiantes);
+        vista.mostrarDetallesProfesor(profesores);
     }
     //AGREGAR PROFESOR
-    public void agregarProfesor(Estudiante estudiante) {
-        Estudiante.insertarEstudiante(estudiante);
-        System.out.println("Estudiante agregado: " + estudiante.getNombre());
+    public void agregarProfesor(Profesor profesor) {
+        Profesor.insertarProfesor(profesor);
+        System.out.println("Profesor agregado: " + profesor.getNombre());
     }
 
     //LISTAR TODOS LOS PROFESORES
-    public List<Estudiante> listarTodosLosProfesores() {
-        return Estudiante.obtenerTodosLosEstudiantes();
+    public List<Profesor> listarTodosLosProfesores() {
+        return Profesor.obtenerTodosLosProfesores();
     }
     //ACTUALIZAR PROFESOR
-    public void actualizarProfesor(String nombreOriginal, Estudiante estudianteActualizado) {
-        Estudiante.actualizarEstudiante(nombreOriginal, estudianteActualizado);
-        System.out.println("Estudiante actualizado: " + estudianteActualizado.getNombre());
+    public void actualizarProfesor(String nombreOriginal, Profesor profesorActualizado) {
+        Profesor.actualizarProfesor(nombreOriginal, profesorActualizado);
+        System.out.println("Profesor actualizado: " + profesorActualizado.getNombre());
     }
     // ELIMINAR PROFESOR
     public void eliminarProfesor(String nombre) {
-        Estudiante.eliminarEstudiante(nombre);
-        System.out.println("Estudiante eliminado: " + nombre);
+        Profesor.eliminarProfesor(nombre);
+        System.out.println("Profesor eliminado: " + nombre);
     }
 
 }
