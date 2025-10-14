@@ -90,4 +90,42 @@ public class Estudiante {
     return estudiantes;
   }
 
+
+  // ACTUALIZAR ESTUDIANTE
+public static void actualizarEstudiante(String nombreOriginal, Estudiante estudianteActualizado) {
+    String sql = "UPDATE estudiante SET nombre = ?, edad = ? WHERE nombre = ?";
+    try {
+        Connection conexion = ConexionDatabase.getConnection();
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setString(1, estudianteActualizado.getNombre());
+        ps.setInt(2, estudianteActualizado.getEdad());
+        ps.setString(3, nombreOriginal);
+        ps.executeUpdate();
+    } catch (Exception e) {
+        System.out.println("Error al actualizar el estudiante: " + e.getMessage());
+    }
+}
+
+//ELIMINAR ESTUDIANTE
+
+public static void eliminarEstudiante(String nombre) {
+    String sql = "DELETE FROM estudiante WHERE nombre = ?";
+    try {
+        Connection conexion = ConexionDatabase.getConnection();
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setString(1, nombre);
+        ps.executeUpdate();
+    } catch (Exception e) {
+        System.out.println("Error al eliminar el estudiante: " + e.getMessage());
+    }
+}
+
+
+
+
+
+
+
+
+
 }

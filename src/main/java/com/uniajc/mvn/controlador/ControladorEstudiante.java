@@ -30,4 +30,20 @@ public class ControladorEstudiante {
     return Estudiante.obtenerTodosLosEstudiantes();
   }
 
+
+
+  //ACTUALIZAR ESTUDIANTE
+
+  public void actualizarEstudiante(String nombreOriginal, Estudiante estudianteActualizado) {
+    Estudiante.actualizarEstudiante(nombreOriginal, estudianteActualizado);
+    System.out.println("Estudiante actualizado: " + estudianteActualizado.getNombre());
+}
+
+
+// ELIMINAR ESTUDIANTE
+public void eliminarEstudiante(String nombre) {
+    Estudiante.eliminarEstudiante(nombre);
+    System.out.println("Estudiante eliminado: " + nombre);
+}
+
 }
