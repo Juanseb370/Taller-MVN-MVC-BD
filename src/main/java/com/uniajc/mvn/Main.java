@@ -115,8 +115,13 @@ public class Main {
     Profesor profesor = new Profesor(nombre, materia,0); // Asignar un ID único, por ejemplo, 0
     Profesor.insertarProfesor(profesor);
     System.out.println("Profesor agregado: " + profesor.getNombre() + " - Materia: " + profesor.getMateria());
-    scanner.close();
-    //scanner.nextLine(); // Consumir el salto de línea pendiente
+
+    scanner.nextLine(); // Consumir el salto de línea pendiente
+    // ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
+    // controlador.agregarEstudiante(estudiante);
+    // controlador.actualizarVista();
+    // scanner.close();
+    
 
     //ACTUALIZAR PROFESOR DESDE CONSOLA
     System.out.print("Ingrese el nombre del profesor a actualizar: ");
