@@ -131,13 +131,13 @@ public class Cursos {
     }
     
     // METODO PARA ELIMINAR CURSO DE LA BASE DE DATOS
-    public static void eliminarCurso(String nombre) {
+    public static void eliminarCurso(String nombreC) {
         String sql = "DELETE FROM cursos WHERE nombre = ?";
 
         try {
             java.sql.Connection conn = ConexionDatabase.getConnection();
             java.sql.PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, nombre);
+            pstmt.setString(1, nombreC);
             int filasAfectadas = pstmt.executeUpdate();
             if (filasAfectadas > 0) {
                 System.out.println("Curso eliminado exitosamente.");
