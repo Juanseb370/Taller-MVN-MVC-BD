@@ -16,6 +16,8 @@ public class Main {
     // Scanner scanner = new Scanner(System.in);
 
 
+
+
     // Estudiante estudiante = new Estudiante();
     // estudiante.setNombre("Leonel Messi");
     // estudiante.setEdad(38);
@@ -27,6 +29,9 @@ public class Main {
     // controlador.actualizarVista();
 
 
+
+
+    
 
     // System.out.print("Ingrese el nombre del estudiante: ");
     // String nombre = scanner.nextLine();

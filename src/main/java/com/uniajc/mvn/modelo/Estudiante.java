@@ -10,15 +10,18 @@ import java.util.ArrayList;
 public class Estudiante {
   private String nombre;
   private int edad;
+  private int id;
 
-  public Estudiante() {
+  public Estudiante(int id) {
     this.nombre = "";
     this.edad = 0;
+    this.id = id;
   }
 
-  public Estudiante(String nombre, int edad) {
+  public Estudiante(String nombre, int edad, int id) {
     this.nombre = nombre;
     this.edad = edad;
+    this.id = id;
   }
 
   public String getNombre() {
@@ -75,7 +78,7 @@ public class Estudiante {
       while (resultSet.next()) {
         String nombre = resultSet.getString("nombre");
         int edad = resultSet.getInt("edad");
-        Estudiante estudiante = new Estudiante(nombre, edad);
+        Estudiante estudiante = new Estudiante(nombre, edad, 0);
         estudiantes.add(estudiante);
       }
 
