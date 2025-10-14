@@ -141,21 +141,23 @@ public class Main {
     scanner2.nextLine(); // Consumir el salto de línea pendiente
     Profesor profesorActualizado = new Profesor(nuevoNombre, nuevaMateria,0);
     Profesor.actualizarProfesor(nombreOriginal, profesorActualizado);
-    // controlador.actualizarVista();
+    System.out.println("Profesor actualizado: " + profesorActualizado.getNombre() + " - Materia: " + profesorActualizado.getMateria());
+    //controlador.actualizarVistaP();
     // scanner2.close();
     scanner2.nextLine(); // Consumir el salto de línea pendiente
 
 
-  }
+  
 
   //ELIMINAR PROFESOR
-  public static void eliminarProfesor(String nombre) {
-    Profesor.eliminarProfesor(nombre);
-    System.out.println("Profesor eliminado: " + nombre);
-  }
-
-  // Cerrar la conexión al final (opcional, ya que el programa termina aquí)
-  public static void cerrarConexion(Connection conexion) {
+    System.out.print("Ingrese el nombre del profesor a eliminar: ");
+    Scanner scanner3 = new Scanner(System.in);
+    String nombreAEliminar = scanner3.nextLine();
+    Profesor.eliminarProfesor(nombreAEliminar);
+    System.out.println("Profesor eliminado: " + nombreAEliminar);
+    //controlador.actualizarVistaP();
+    scanner3.close();
+    //Cerrar la conexión al final (opcional, ya que el programa termina aquí)
     try {
       if (conexion != null && !conexion.isClosed()) {
         conexion.close();
@@ -164,7 +166,8 @@ public class Main {
     } catch (Exception e) {
       System.out.println("Error al cerrar la conexión: " + e.getMessage());
     }
-  }
+
+}
 }
   
 

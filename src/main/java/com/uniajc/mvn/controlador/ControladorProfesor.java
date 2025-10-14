@@ -20,7 +20,7 @@ public class ControladorProfesor {
         this.profesores = new ArrayList<Profesor>();
     }   
     //ACTUALIZAR VISTA  
-    public void actualizarVista() {
+    public void actualizarVistaP() {
         List<Profesor> profesores = listarTodosLosProfesores();
         //IMPRIMIR EN CONSOLA
         vista.mostrarDetallesProfesor(profesores);
