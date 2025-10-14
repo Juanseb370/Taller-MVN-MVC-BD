@@ -21,6 +21,8 @@ public class Main {
 
     Connection conexion = ConexionDatabase.getConnection();
 
+
+    //----------------------------------------------------------------------------------------------------
     //descomentar
    //Scanner scanner = new Scanner(System.in); 
 
@@ -109,7 +111,7 @@ public class Main {
 
 
 
-
+//---------------------------------------------------------------------------------------------------
 
 
      //AGREGAR PROFESOR DESDE CONSOLA
@@ -166,6 +168,14 @@ public class Main {
     } catch (Exception e) {
       System.out.println("Error al cerrar la conexión: " + e.getMessage());
     }
+
+
+
+    //---------------------------------------------------------------------------------------------------------------
+
+    
+
+
 
 }
 }
