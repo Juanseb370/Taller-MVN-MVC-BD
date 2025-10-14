@@ -13,36 +13,36 @@ public class Main {
 
     Connection conexion = ConexionDatabase.getConnection();
 
-    // Scanner scanner = new Scanner(System.in);
-
-
-
+   Scanner scanner = new Scanner(System.in);
 
     // Estudiante estudiante = new Estudiante();
-    // estudiante.setNombre("Leonel Messi");
-    // estudiante.setEdad(38);
+    // estudiante.setNombre("juan almendra");
+    // estudiante.setEdad(25);
+    
 
-    // VistaEstudiante vista = new VistaEstudiante();
+    VistaEstudiante vista = new VistaEstudiante();
     // ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
 
     // controlador.agregarEstudiante(estudiante);
     // controlador.actualizarVista();
-
-
-
-
     
 
-    // System.out.print("Ingrese el nombre del estudiante: ");
-    // String nombre = scanner.nextLine();
 
-    // System.out.print("Ingrese la edad del estudiante: ");
-    // int edad = scanner.nextInt();
 
-    // Estudiante estudiante = new Estudiante(nombre, edad);
-    // controlador.agregarEstudiante(estudiante);
-    // controlador.actualizarVista();
-    // scanner.close();
+
+
+
+    System.out.print("Ingrese el nombre del estudiante: ");
+    String nombre = scanner.nextLine();
+
+    System.out.print("Ingrese la edad del estudiante: ");
+    int edad = scanner.nextInt();
+
+    Estudiante estudiante = new Estudiante(nombre, edad, 3); // Asignar un ID único, por ejemplo, 3
+    ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
+    controlador.agregarEstudiante(estudiante);
+    controlador.actualizarVista();
+    scanner.close();
   }
 }
 

@@ -15,7 +15,7 @@ public class VistaEstudiante {
      */
     estudiantes.forEach(estudiante -> {
       System.out.println(" Imprimiendo desde la clase vista: ");
-      System.out.println("Nombre: " + estudiante.getNombre() + " - " + "Edad: " + estudiante.getEdad());
+      System.out.println("Nombre: " + estudiante.getNombre() + " - " + "Edad: " + estudiante.getEdad() + " - " + "ID: " + estudiante.getId());
     });
   }
 }

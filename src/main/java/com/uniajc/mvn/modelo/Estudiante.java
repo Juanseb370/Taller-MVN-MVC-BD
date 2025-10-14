@@ -3,6 +3,7 @@ package com.uniajc.mvn.modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
@@ -10,27 +11,31 @@ import java.util.ArrayList;
 public class Estudiante {
   private String nombre;
   private int edad;
-  private int id;
+  private int id_estudiante;
 
-  public Estudiante(int id) {
-    this.nombre = "";
-    this.edad = 0;
-    this.id = id;
+
+  public Estudiante() {
+    
   }
+
 
   public Estudiante(String nombre, int edad, int id) {
     this.nombre = nombre;
     this.edad = edad;
-    this.id = id;
+    this.id_estudiante = id;
   }
 
+
+ 
+
+  //AQUI ESTAN LOS GEETTER Y SETS
   public int getId() {
-    return this.id;
+    return this.id_estudiante;
   } 
 
 
   public void setId(int id) {
-    this.id = id;
+    this.id_estudiante = id;
   }
 
 
@@ -55,7 +60,8 @@ public class Estudiante {
   // METODO PARA CREAR Y GUARDAR ESTUDIANTE EN LA BASE DE DATOS
   public static void insertarEstudiante(Estudiante estudiante) {
 
-    String sql = "INSERT INTO estudiante (nombre, edad, id) VALUES (?, ?, ?)";
+    String sql = "INSERT INTO estudiante (nombre, edad) VALUES (?, ?)";
+
 
     try {
       Connection conexion = ConexionDatabase.getConnection();
@@ -66,16 +72,19 @@ public class Estudiante {
 
 
       //ESTOS SON LOS STMT
-      stmt.setString(1, estudiante.getNombre());
-      stmt.setInt(2, estudiante.getEdad());
-      stmt.setInt(3, estudiante.getId());
-      stmt.executeUpdate();
+      // stmt.setString(1, estudiante.getNombre());
+      // stmt.setInt(2, estudiante.getEdad());
+      // stmt.setInt(3, estudiante.getId());
+      // stmt.executeUpdate();
 
 
 
       preparedStatement.setString(1, estudiante.getNombre());
       preparedStatement.setInt(2, estudiante.getEdad());
-      preparedStatement.setInt(3, estudiante.getId());
+  
+      
+      
+      
 
       // Ejecutar la sentencias SQL INSERT, UPDATE o DELETE
       preparedStatement.executeUpdate();
@@ -83,8 +92,10 @@ public class Estudiante {
       System.out.println("Error al insertar el estudiante: " + e.getMessage());
       e.printStackTrace();
     }
-
   }
+
+
+  // METODO PARA LISTAR ESTUDIANTES
 
   public static List<Estudiante> obtenerTodosLosEstudiantes() {
 
@@ -144,13 +155,4 @@ public static void eliminarEstudiante(String nombre) {
         System.out.println("Error al eliminar el estudiante: " + e.getMessage());
     }
 }
-
-
-
-
-
-
-
-
-
 }

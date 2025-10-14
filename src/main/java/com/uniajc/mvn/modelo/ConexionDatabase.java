@@ -2,6 +2,7 @@ package com.uniajc.mvn.modelo;
 
 // Imports for SQL connections
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -66,5 +67,7 @@ public class ConexionDatabase {
       }
     }
   }
+
+  
 
 }
