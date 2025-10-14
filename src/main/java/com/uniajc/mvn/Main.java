@@ -38,7 +38,7 @@ public class Main {
     System.out.print("Ingrese la edad del estudiante: ");
     int edad = scanner.nextInt();
 
-    Estudiante estudiante = new Estudiante(nombre, edad, 3); // Asignar un ID único, por ejemplo, 3
+    Estudiante estudiante = new Estudiante(nombre, edad,0); // Asignar un ID único, por ejemplo, 0
     ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
     controlador.agregarEstudiante(estudiante);
     controlador.actualizarVista();
