@@ -106,6 +106,7 @@ public class Estudiante {
     try {
       Connection conexion = ConexionDatabase.getConnection();
 
+      // Crear un objeto Statement para ejecutar la consulta SQL
       Statement statement = conexion.createStatement();
 
       // Ejecutar la sentencias SQL SELECT

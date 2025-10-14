@@ -21,6 +21,7 @@ public class ControladorEstudiante {
   //ACTUALIZAR VISTA  
   public void actualizarVista() {
     List<Estudiante> estudiantes = listarTodosLosEstudiantes();
+    //IMPRIMIR EN CONSOLA
     vista.mostrarDetallesEstudiante(estudiantes);
   }
   //AGREGAR ESTUDIANTE
