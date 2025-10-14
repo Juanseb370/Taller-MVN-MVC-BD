@@ -18,12 +18,12 @@ public class ControladorEstudiante {
     this.estudiantes = new ArrayList<Estudiante>();
 
   }
-
+  //ACTUALIZAR VISTA  
   public void actualizarVista() {
     List<Estudiante> estudiantes = listarTodosLosEstudiantes();
     vista.mostrarDetallesEstudiante(estudiantes);
   }
-
+  //AGREGAR ESTUDIANTE
   public void agregarEstudiante(Estudiante estudiante) {
     Estudiante.insertarEstudiante(estudiante);
     System.out.println("Estudiante agregado: " + estudiante.getNombre());
@@ -33,8 +33,6 @@ public class ControladorEstudiante {
     return Estudiante.obtenerTodosLosEstudiantes();
   }
 
-
-//GUARDAR ESTUDIANTE
 
 
 

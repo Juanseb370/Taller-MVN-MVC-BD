@@ -32,6 +32,17 @@
       <version>8.0.33</version>
     </dependency>
 
+
+    <!-- SQLlite Library -->
+
+
+
+
+
+
+
+
+
     <!-- PostgreSQL Library -->
     <dependency>
       <groupId>org.postgresql</groupId>
