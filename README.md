@@ -17,122 +17,88 @@ El proyecto utiliza un archivo `config.properties` para definir los parámetros 
 URL=jdbc:mysql://localhost:3306/practica-mvc
 USERNAME=root
 PASSWORD=Pancha2025
+# Práctica Maven MVC con Base de Datos
+
+Este proyecto es una práctica de arquitectura MVC en Java usando Maven y MySQL. Aquí se documenta cómo usar el archivo `config.properties` que contiene la configuración de la conexión a la base de datos.
+
+## Ubicación del archivo de configuración
+
+El archivo `config.properties` se encuentra en la raíz del proyecto y se utiliza para leer la URL JDBC, usuario y contraseña que usa la clase `ConexionDatabase`.
+
+Contenido actual (archivo incluido en este proyecto):
+
+```
+URL=jdbc:mysql://localhost:3306/practicamvc
+USERNAME=root
+PASSWORD=Pancha2025
 ```
 
-- **URL**: Cadena de conexión JDBC a la base de datos MySQL.
-- **USERNAME**: Usuario de la base de datos.
-- **PASSWORD**: Contraseña del usuario de la base de datos.
+### Claves disponibles
+- `URL` — Cadena JDBC para conectarse a MySQL.
+- `USERNAME` — Usuario de la base de datos.
+- `PASSWORD` — Contraseña del usuario.
 
-> **Importante:** Modifica estos valores según tu entorno y credenciales de MySQL.
+> Seguridad: no subas credenciales reales a repositorios públicos. Para entornos reales usar variables de entorno o gestores de secretos.
 
-## Uso del Archivo `config.properties`
+## Cómo la aplicación carga la configuración
 
-La clase `ConexionDatabase` carga automáticamente el archivo `config.properties` al iniciar la aplicación para obtener los datos de conexión. Si el archivo no existe o los datos son incorrectos, la conexión fallará.
+La clase `ConexionDatabase` (en `src/main/java/com/uniajc/mvn/modelo/ConexionDatabase.java`) carga el archivo `config.properties` desde la raíz del proyecto con `new File("config.properties")` y lee las propiedades `URL`, `USERNAME` y `PASSWORD`. Luego crea la conexión JDBC usando `DriverManager.getConnection(URL, USERNAME, PASSWORD)`.
 
-No subas tus credenciales reales a repositorios públicos.
+Si prefieres ubicar `config.properties` en otro sitio, actualiza la ruta en `ConexionDatabase` o modifica el código para leer la ruta desde una variable de entorno.
 
-## Ejecución del Proyecto
+## Preparar la base de datos
 
-1. Asegúrate de tener MySQL en ejecución y la base de datos `practica-mvc` creada.
-2. Configura el archivo `config.properties` con tus datos.
-3. Compila el proyecto con Maven:
-   ```sh
-   mvn clean package
-   ```
-4. Ejecuta la aplicación:
-   ```sh
-   java -cp target/practica-mvn-mvc-bd-1.0-SNAPSHOT.jar com.uniajc.mvn.Main
-   ```
+El script SQL para crear la base y las tablas está en `src/main/resources/db.sql`.
 
-## Dependencias
+Desde PowerShell (Windows) puedes ejecutar:
 
-- Java 8+
-- Maven
-- MySQL
-- Driver JDBC de MySQL (incluido en el `pom.xml`)
+```powershell
+# Ejecuta el script db.sql (te pedirá la contraseña de MySQL)
+# Ajusta el usuario y la ruta si es necesario
+mysql -u root -p < "${PWD}\src\main\resources\db.sql"
+```
+
+También puedes abrir el archivo `db.sql` en MySQL Workbench o phpMyAdmin y ejecutarlo manualmente.
+
+## Compilar y ejecutar (PowerShell)
+
+1. Compilar con Maven:
+
+```powershell
+mvn clean package
+```
+
+2. Ejecutar la aplicación (opción 1: usando el plugin exec en el pom, si está configurado):
+
+```powershell
+mvn exec:java -Dexec.mainClass="com.uniajc.mvn.Main"
+```
+
+O (opción 2) ejecutar el JAR generado:
+
+```powershell
+# Ajusta el nombre del jar según tu build
+java -jar target\practica-mvn-mvc-bd-1.0-SNAPSHOT.jar
+```
+
+## Notas sobre errores comunes
+
+- Archivo `config.properties` no encontrado: asegúrate de ejecutar la app desde la raíz del proyecto o proveer la ruta correcta.
+- Credenciales incorrectas: verifica `USERNAME`/`PASSWORD` y que el usuario tenga permisos sobre la base `practicamvc`.
+- Driver JDBC: el `pom.xml` debe incluir el conector MySQL (`mysql-connector-java`).
+
+## Mejores prácticas y alternativas
+
+- En lugar de almacenar credenciales en texto plano, usa variables de entorno o un gestor de secretos.
+- Para múltiples entornos (dev/test/prod) mantén archivos de configuración separados y seguros.
 
 ---
 
-## Documentación de Clases Principales
+Si quieres, puedo:
 
-### `Estudiante` (Modelo)
-Representa la entidad estudiante con atributos `nombre` y `edad`. Incluye métodos para insertar y obtener estudiantes desde la base de datos.
+- Añadir lectura de `config.properties` desde la carpeta `resources`.
+- Cambiar `ConexionDatabase` para aceptar la ruta por variable de entorno.
+- Añadir instrucciones para crear un archivo `.env` y un pequeño script para cargarlo en Windows.
 
-### `ControladorEstudiante` (Controlador)
-Gestiona la lógica entre el modelo y la vista. Permite agregar y listar estudiantes.
-
-### `VistaEstudiante` (Vista)
-Muestra los datos de los estudiantes (implementación básica).
-
-### `ConexionDatabase`
-Gestiona la conexión a la base de datos usando los parámetros definidos en `config.properties`.
-
----
-
-## Guía para Crear Métodos de Actualizar y Eliminar
-
-Para ampliar la funcionalidad y permitir actualizar y eliminar estudiantes, sigue estos pasos:
-
-### 1. En el Modelo (`Estudiante.java`)
-
-#### Método para actualizar:
-```java
-public static void actualizarEstudiante(String nombreOriginal, Estudiante estudianteActualizado) {
-    String sql = "UPDATE estudiante SET nombre = ?, edad = ? WHERE nombre = ?";
-    try {
-        Connection conexion = ConexionDatabase.getConnection();
-        PreparedStatement ps = conexion.prepareStatement(sql);
-        ps.setString(1, estudianteActualizado.getNombre());
-        ps.setInt(2, estudianteActualizado.getEdad());
-        ps.setString(3, nombreOriginal);
-        ps.executeUpdate();
+Indícame cuál prefieres y lo implemento.
     } catch (Exception e) {
-        System.out.println("Error al actualizar el estudiante: " + e.getMessage());
-    }
-}
-```
-
-#### Método para eliminar:
-```java
-public static void eliminarEstudiante(String nombre) {
-    String sql = "DELETE FROM estudiante WHERE nombre = ?";
-    try {
-        Connection conexion = ConexionDatabase.getConnection();
-        PreparedStatement ps = conexion.prepareStatement(sql);
-        ps.setString(1, nombre);
-        ps.executeUpdate();
-    } catch (Exception e) {
-        System.out.println("Error al eliminar el estudiante: " + e.getMessage());
-    }
-}
-```
-
-### 2. En el Controlador (`ControladorEstudiante.java`)
-
-#### Método para actualizar:
-```java
-public void actualizarEstudiante(String nombreOriginal, Estudiante estudianteActualizado) {
-    Estudiante.actualizarEstudiante(nombreOriginal, estudianteActualizado);
-    System.out.println("Estudiante actualizado: " + estudianteActualizado.getNombre());
-}
-```
-
-#### Método para eliminar:
-```java
-public void eliminarEstudiante(String nombre) {
-    Estudiante.eliminarEstudiante(nombre);
-    System.out.println("Estudiante eliminado: " + nombre);
-}
-```
-
-### 3. Uso en `Main.java`
-
-Puedes llamar estos métodos desde el controlador, por ejemplo:
-```java
-controlador.actualizarEstudiante("Leonel Messi", new Estudiante("Leo Messi", 39));
-controlador.eliminarEstudiante("Leo Messi");
-```
-
----
-
-Para dudas o problemas, contacta al autor o revisa la documentación en el código fuente.
