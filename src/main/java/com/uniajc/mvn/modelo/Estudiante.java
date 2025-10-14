@@ -67,7 +67,7 @@ public class Estudiante {
       Connection conexion = ConexionDatabase.getConnection();
 
       PreparedStatement preparedStatement = conexion.prepareStatement(sql);
-      PreparedStatement stmt = conexion.prepareStatement(sql);
+      //PreparedStatement stmt = conexion.prepareStatement(sql);
 
 
 
