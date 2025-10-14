@@ -139,9 +139,27 @@ public class Main {
     scanner2.nextLine(); // Consumir el salto de línea pendiente
 
 
+  }
 
-
-
+  //ELIMINAR PROFESOR
+  public static void eliminarProfesor() {
+    System.out.print("Ingrese el nombre del profesor a eliminar: ");
+    Scanner scanner3 = new Scanner(System.in);
+    String nombreAEliminar = scanner3.nextLine();
+    Profesor.eliminarProfesor(nombreAEliminar);
+    // controlador.actualizarVista();
+    scanner3.close();
+  }
+  // Cerrar la conexión al final (opcional, ya que el programa termina aquí)
+  public static void cerrarConexion(Connection conexion) {
+    try {
+      if (conexion != null && !conexion.isClosed()) {
+        conexion.close();
+        System.out.println("Conexión cerrada.");
+      }
+    } catch (Exception e) {
+      System.out.println("Error al cerrar la conexión: " + e.getMessage());
+    }
   }
 }
   
