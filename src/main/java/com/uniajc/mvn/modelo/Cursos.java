@@ -105,7 +105,7 @@ public class Cursos {
 
 
     // METODO PARA ACTUALIZAR NOMBRE Y DESCRIPCION DEL CURSO EN LA BASE DE DATOS
-    public static void actualizarCurso(String nombreOriginal, Cursos cursoActualizado) {
+    public static void actualizarCurso(String nombreOriginalC, Cursos cursoActualizado) {
         if (cursoActualizado == null || !cursoActualizado.validarDatos()) {
             System.out.println("Datos del curso no son validos.");
             return;
@@ -118,7 +118,7 @@ public class Cursos {
             java.sql.PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, cursoActualizado.getNombre());
             pstmt.setString(2, cursoActualizado.getDescripcion());
-            pstmt.setString(3, nombreOriginal);
+            pstmt.setString(3, nombreOriginalC);
             int filasAfectadas = pstmt.executeUpdate();
             if (filasAfectadas > 0) {
                 System.out.println("Curso actualizado exitosamente.");
