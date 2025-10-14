@@ -33,19 +33,6 @@ public class Main {
     
 
 
-    //AGREGAR PROFESOR DESDE CONSOLA
-
-    System.out.print("Ingrese el nombre del profesor: ");
-    Scanner scanner = new Scanner(System.in);
-    String nombre = scanner.nextLine();
-    System.out.print("Ingrese la materia del profesor: ");
-    String materia = scanner.nextLine();
-    Profesor profesor = new Profesor(nombre, materia,0); // Asignar un ID único, por ejemplo, 0
-    Profesor.insertarProfesor(profesor);
-    System.out.println("Profesor agregado: " + profesor.getNombre() + " - Materia: " + profesor.getMateria());
-    scanner.close();
-    //scanner.nextLine(); // Consumir el salto de línea pendiente
-
     
 
 
@@ -115,6 +102,36 @@ public class Main {
 
 
 
+
+
+
+     //AGREGAR PROFESOR DESDE CONSOLA
+
+    System.out.print("Ingrese el nombre del profesor: ");
+    Scanner scanner = new Scanner(System.in);
+    String nombre = scanner.nextLine();
+    System.out.print("Ingrese la materia del profesor: ");
+    String materia = scanner.nextLine();
+    Profesor profesor = new Profesor(nombre, materia,0); // Asignar un ID único, por ejemplo, 0
+    Profesor.insertarProfesor(profesor);
+    System.out.println("Profesor agregado: " + profesor.getNombre() + " - Materia: " + profesor.getMateria());
+    scanner.close();
+    //scanner.nextLine(); // Consumir el salto de línea pendiente
+
+    //ACTUALIZAR PROFESOR DESDE CONSOLA
+    System.out.print("Ingrese el nombre del profesor a actualizar: ");
+    Scanner scanner2 = new Scanner(System.in);
+    String nombreOriginal = scanner2.nextLine();
+    System.out.print("Ingrese el nuevo nombre del profesor: ");
+    String nuevoNombre = scanner2.nextLine();
+    System.out.print("Ingrese la nueva materia del profesor: ");
+    String nuevaMateria = scanner2.nextLine();
+    scanner2.nextLine(); // Consumir el salto de línea pendiente
+    Profesor profesorActualizado = new Profesor(nuevoNombre, nuevaMateria,0);
+    Profesor.actualizarProfesor(nombreOriginal, profesorActualizado);
+    // controlador.actualizarVista();
+    // scanner2.close();
+    scanner2.nextLine(); // Consumir el salto de línea pendiente
 
 
 

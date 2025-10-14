@@ -83,6 +83,46 @@ public class Profesor {
         return profesores;
     }
 
+    // METODO PARA ACTUALIZAR PROFESOR
+    public static void actualizarProfesor(String nombreOriginal, Profesor profesorActualizado) {
+        String sql = "UPDATE profesor SET nombre = ?, materia = ? WHERE nombre = ?";
+        try {
+            Connection connection = ConexionDatabase.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, profesorActualizado.getNombre());
+            preparedStatement.setString(2, profesorActualizado.getMateria());
+            preparedStatement.setString(3, nombreOriginal);
+            int filasAfectadas = preparedStatement.executeUpdate();
+            if (filasAfectadas > 0) {
+                System.out.println("Profesor actualizado: " + profesorActualizado.getNombre());
+            } else {
+                System.out.println("No se encontró el profesor con el nombre: " + nombreOriginal);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el profesor: " + e.getMessage());
+        }
+    }
+
+    // METODO PARA ELIMINAR PROFESOR
+    public static void eliminarProfesor(String nombre) {
+        String sql = "DELETE FROM profesor WHERE nombre = ?";
+        try {
+            Connection connection = ConexionDatabase.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, nombre);
+            int filasAfectadas = preparedStatement.executeUpdate();
+            if (filasAfectadas > 0) {
+                System.out.println("Profesor eliminado: " + nombre);
+            } else {
+                System.out.println("No se encontró el profesor con el nombre: " + nombre);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar el profesor: " + e.getMessage());
+        }
+    }
+
+        
+
 
 
 
