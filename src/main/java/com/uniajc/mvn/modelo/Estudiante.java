@@ -112,6 +112,7 @@ public class Estudiante {
       // Ejecutar la sentencias SQL SELECT
       ResultSet resultSet = statement.executeQuery(sql);
 
+      // Recorrer los resultados y crear objetos Estudiante
       while (resultSet.next()) {
         String nombre = resultSet.getString("nombre");
         int edad = resultSet.getInt("edad");

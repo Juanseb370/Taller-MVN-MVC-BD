@@ -30,6 +30,8 @@ public class ControladorEstudiante {
     System.out.println("Estudiante agregado: " + estudiante.getNombre());
   }
 
+
+  //LISTAR TODOS LOS ESTUDIANTES
   public List<Estudiante> listarTodosLosEstudiantes() {
     return Estudiante.obtenerTodosLosEstudiantes();
   }
