@@ -16,7 +16,7 @@ El proyecto utiliza un archivo `config.properties` para definir los parámetros 
 ```
 URL=jdbc:mysql://localhost:3306/practica-mvc
 USERNAME=root
-PASSWORD=admin
+PASSWORD=Pancha2025
 ```
 
 - **URL**: Cadena de conexión JDBC a la base de datos MySQL.
