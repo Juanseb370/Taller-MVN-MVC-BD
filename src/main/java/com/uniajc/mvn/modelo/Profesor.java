@@ -84,19 +84,19 @@ public class Profesor {
     }
 
     // METODO PARA ACTUALIZAR PROFESOR
-    public static void actualizarProfesor(String nombreOriginalP, Profesor profesorActualizado) {
+    public static void actualizarProfesor(String nombreOriginal, Profesor profesorActualizado) {
         String sql = "UPDATE profesor SET nombre = ?, materia = ? WHERE nombre = ?";
         try {
             Connection connection = ConexionDatabase.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, profesorActualizado.getNombre());
             preparedStatement.setString(2, profesorActualizado.getMateria());
-            preparedStatement.setString(3, nombreOriginalP);
+            preparedStatement.setString(3, nombreOriginal);
             int filasAfectadas = preparedStatement.executeUpdate();
             if (filasAfectadas > 0) {
                 System.out.println("Profesor actualizado: " + profesorActualizado.getNombre());
             } else {
-                System.out.println("No se encontró el profesor con el nombre: " + nombreOriginalP);
+                System.out.println("No se encontró el profesor con el nombre: " + nombreOriginal);
             }
         } catch (SQLException e) {
             System.out.println("Error al actualizar el profesor: " + e.getMessage());

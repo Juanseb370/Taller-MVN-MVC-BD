@@ -1,0 +1,23 @@
+[33m51d00b3[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mJuan-Almendra[m[33m)[m Commit Visual Studio
+[33mb2d3350[m[33m ([m[1;31morigin/Juan-Almendra[m[33m)[m Revision y Correccion Main.java
+[33m6bd6f09[m SE AGREGA TABLA CURSOS A LA BASE DE DATOS SE CONFIGURA EN EL MAIN EN EL MODELO Y EN EL CONTROLADOR SE PRUEBA SE CONECTAN Y SE INSERTAN LOS DATOS CON EXITO
+[33mbc06784[m[33m ([m[1;31morigin/Sebastian-Abadia[m[33m)[m Corrigiendo Ajustes codigo y redactando Readme
+[33m519f2c7[m Corrigiendo ControladorProfesor y main e insertando datos en base de datos
+[33m6f74074[m Se corrige Controlador Profesor y se ajusta main
+[33m9543b17[m SE CONFIGURA METODO ACTUALIZAR PROFESOR Y SE INSERTAN DATOS
+[33m7700c45[m SE AGREGA VISTA PROFESOR Y SE HACEN AJUSTES A MAIN
+[33m584ceb4[m SE CREA CONTROLADOR PROFESOR Y SE AGREGAN LOS MISMOS METODOS DEL MODELO ESTUDIANTE AL MODELO PROFESOR Y SE INSERTAN NUEVAMENTE DATOS
+[33m0df0574[m SE CREA MODELO PROFESOR, SE CONFIGURA MAIN, SE CONECTA A UNA NUEVA BASE DE DATOS EN PROGRESQL, SE CREA TABLA PROFESOR CON CAMPOS ID NOMBRE Y MATERIA, Y SE INSERTAN DATOS, TODO CON EXITO
+[33maebefa3[m METODOS ELIMINAR Y ACTUALIZAR CONFIGURADOS Y PROBADOS CON EXITO
+[33mbd6827f[m se ajusta el readme y controlador y modelo estudiante
+[33ma06591a[m Agregando comentarios para recordar las estructuras
+[33m2626e4d[m Se comenta la linea 70 de modelo- estudiante ya q no se usa
+[33m9a41475[m Configuracion config propiertes conexion base de datos PostgresQL
+[33m6e44a72[m Segunda verificacion de codigo y base de datos
+[33m22961fc[m CONFIGURANDO CODIGO Y AGREGANDO METODOS Y PROBANDO CONEXION BASE DE DATOS Y INSERTANDO VALORES
+[33m89b2cac[m Creacion de los STMT
+[33m844fa42[m Se agrega a estudiante, actualizar estudiante y eliminar estudiante
+[33m3b6e5a9[m Creacion Id
+[33m098f052[m Acabo de conectar la base de datos y el visual
+[33m3a98eb1[m Informacion Conexion base de datos
+[33m237fb58[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m, [m[1;32mSebastian-Abadia[m[33m)[m Carga Proyecto Base
