@@ -24,6 +24,16 @@ public class Estudiante {
     this.id = id;
   }
 
+  public int getId() {
+    return this.id;
+  } 
+
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+
   public String getNombre() {
     return this.nombre;
   }
@@ -40,17 +50,32 @@ public class Estudiante {
     this.edad = edad;
   }
 
+
+
+  // METODO PARA CREAR Y GUARDAR ESTUDIANTE EN LA BASE DE DATOS
   public static void insertarEstudiante(Estudiante estudiante) {
 
-    String sql = "INSERT INTO estudiante (nombre, edad) VALUES (?, ?)";
+    String sql = "INSERT INTO estudiante (nombre, edad, id) VALUES (?, ?, ?)";
 
     try {
       Connection conexion = ConexionDatabase.getConnection();
 
       PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+      PreparedStatement stmt = conexion.prepareStatement(sql);
+
+
+
+      //ESTOS SON LOS STMT
+      stmt.setString(1, estudiante.getNombre());
+      stmt.setInt(2, estudiante.getEdad());
+      stmt.setInt(3, estudiante.getId());
+      stmt.executeUpdate();
+
+
 
       preparedStatement.setString(1, estudiante.getNombre());
       preparedStatement.setInt(2, estudiante.getEdad());
+      preparedStatement.setInt(3, estudiante.getId());
 
       // Ejecutar la sentencias SQL INSERT, UPDATE o DELETE
       preparedStatement.executeUpdate();
