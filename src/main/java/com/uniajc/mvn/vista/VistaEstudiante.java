@@ -2,8 +2,6 @@ package com.uniajc.mvn.vista;
 
 import java.util.List;
 
-import com.uniajc.mvn.modelo.Estudiante;
-
 public class VistaEstudiante {
   public void mostrarDetallesEstudiante(List<Estudiante> estudiantes) {
     /*

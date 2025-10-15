@@ -1,243 +1,176 @@
 package com.uniajc.mvn;
 
-import java.sql.Connection;
-import java.util.List;
-import java.util.Scanner;
-
-import com.uniajc.mvn.controlador.ControladorCurso;
 import com.uniajc.mvn.controlador.ControladorEstudiante;
 import com.uniajc.mvn.controlador.ControladorProfesor;
-
-import com.uniajc.mvn.modelo.ConexionDatabase;
-import com.uniajc.mvn.modelo.Cursos;
-import com.uniajc.mvn.modelo.Estudiante;
-import com.uniajc.mvn.modelo.Profesor;
-
+import com.uniajc.mvn.controlador.ControladorCurso;
 import com.uniajc.mvn.vista.VistaEstudiante;
 import com.uniajc.mvn.vista.VistaProfesor;
 
-
+import java.util.Scanner;
 
 public class Main {
-  public static void main(String[] args) {
 
-    Connection conexion = ConexionDatabase.getConnection();
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
+        // Instancias de vistas (solo para mostrar datos en consola)
+        VistaEstudiante vistaEst = new VistaEstudiante();
+        VistaProfesor vistaProf = new VistaProfesor();
 
-    //----------------------------------------------------------------------------------------------------
-    //descomentar
-   Scanner scanner = new Scanner(System.in); 
+        // Instancias de controladores
+        ControladorEstudiante ctrlEst = new ControladorEstudiante(null, vistaEst);
+        ControladorProfesor ctrlProf = new ControladorProfesor(null, vistaProf);
+        ControladorCurso ctrlCurso = new ControladorCurso();
 
-   //no descomentar
-    // Estudiante estudiante = new Estudiante();
-    // estudiante.setNombre("juan almendra");
-    // estudiante.setEdad(25);
-    
-//descomentar
-    VistaEstudiante vista = new VistaEstudiante();
+        int opcionPrincipal;
 
-    //no descomentar
-    // ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
+        do {
+            System.out.println("\n===== MENÚ PRINCIPAL =====");
+            System.out.println("1. Gestión de Estudiantes");
+            System.out.println("2. Gestión de Profesores");
+            System.out.println("3. Gestión de Cursos");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcionPrincipal = scanner.nextInt();
+            scanner.nextLine(); // limpiar buffer
 
-    // controlador.agregarEstudiante(estudiante);
-    // controlador.actualizarVista();
-    
+            switch (opcionPrincipal) {
+                case 1 -> menuEstudiantes(ctrlEst, scanner);
+                case 2 -> menuProfesores(ctrlProf, scanner);
+                case 3 -> menuCursos(ctrlCurso, scanner);
+                case 0 -> System.out.println("Saliendo del sistema...");
+                default -> System.out.println("Opción inválida, intente de nuevo.");
+            }
+        } while (opcionPrincipal != 0);
 
-
-    
-
-
-
-
-
-
-
-    // CODIGO PARA MANEJAR ESTUDIANTES
-
-    //AGREGAR ESTUDIANTE DESDE CONSOLA
-
-    System.out.print("Ingrese el nombre del estudiante: ");
-    String nombre = scanner.nextLine();
-
-    System.out.print("Ingrese la edad del estudiante: ");
-    int edad = scanner.nextInt();
-
-    scanner.nextLine(); // Consumir el salto de línea pendiente
-
-    Estudiante estudiante = new Estudiante(nombre, edad,0); // Asignar un ID único, por ejemplo, 0
-    ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
-    controlador.agregarEstudiante(estudiante);
-    controlador.actualizarVista();
-    // scanner.close();
-    scanner.nextLine(); // Consumir el salto de línea pendiente
-
-
-
-    //ACTUALIZAR ESTUDIANTE
-
-    System.out.print("Ingrese el nombre del estudiante a actualizar: ");
-    Scanner scanner2 = new Scanner(System.in);
-    String nombreOriginal = scanner2.nextLine();
-    System.out.print("Ingrese el nuevo nombre del estudiante: ");
-    String nuevoNombre = scanner2.nextLine();
-    System.out.print("Ingrese la nueva edad del estudiante: ");
-    int nuevaEdad = scanner2.nextInt();
-
-    scanner.nextLine(); // Consumir el salto de línea pendiente
-
-    Estudiante estudianteActualizado = new Estudiante(nuevoNombre, nuevaEdad,0);
-    controlador.actualizarEstudiante(nombreOriginal, estudianteActualizado);
-    controlador.actualizarVista();
-    // scanner2.close();
-
-    scanner2.nextLine(); // Consumir el salto de línea pendiente
-    
-
-
-    //ELIMINAR ESTUDIANTE
-    System.out.print("Ingrese el nombre del estudiante a eliminar: ");
-    Scanner scanner3 = new Scanner(System.in);
-    String nombreAEliminar = scanner3.nextLine();
-    controlador.eliminarEstudiante(nombreAEliminar);
-    controlador.actualizarVista();
-    //scanner3.close();
-    // Cerrar la conexión al final (opcional, ya que el programa termina aquí)
-    // try {
-    //   if (conexion != null && !conexion.isClosed()) {
-    //     conexion.close();
-    //     System.out.println("Conexión cerrada.");
-    //   }
-    // } catch (Exception e) {
-    //   System.out.println("Error al cerrar la conexión: " + e.getMessage());
-    // }
-
-
-
-//---------------------------------------------------------------------------------------------------
-
-
-     //AGREGAR PROFESOR DESDE CONSOLA
-
-    System.out.print("Ingrese el nombre del profesor: ");
-    Scanner scanner4 = new Scanner(System.in);
-    String nombreP = scanner4.nextLine();
-    System.out.print("Ingrese la materia del profesor: ");
-    String materia = scanner4.nextLine();
-    Profesor profesor = new Profesor(nombreP, materia,0); // Asignar un ID único, por ejemplo, 0
-    Profesor.insertarProfesor(profesor);
-    System.out.println("Profesor agregado: " + profesor.getNombre() + " - Materia: " + profesor.getMateria());
-
-    scanner4.nextLine(); // Consumir el salto de línea pendiente
-    // ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
-    // controlador.agregarEstudiante(estudiante);
-    // controlador.actualizarVista();
-    // scanner.close();
-    //-----------------------------------------------------------------------------------------------
-    
-
-    //ACTUALIZAR PROFESOR DESDE CONSOLA
-    System.out.print("Ingrese el nombre del profesor a actualizar: ");
-    Scanner scanner5 = new Scanner(System.in);
-    String nombreOriginalC = scanner5.nextLine();
-    System.out.print("Ingrese el nuevo nombre del profesor: ");
-    String nuevoNombreC = scanner5.nextLine();
-    System.out.print("Ingrese la nueva materia del profesor: ");
-    String nuevaMateria = scanner5.nextLine();
-    scanner2.nextLine(); // Consumir el salto de línea pendiente
-    Profesor profesorActualizado = new Profesor(nuevoNombreC, nuevaMateria,0);
-    Profesor.actualizarProfesor(nombreOriginal, profesorActualizado);
-    System.out.println("Profesor actualizado: " + profesorActualizado.getNombre() + " - Materia: " + profesorActualizado.getMateria());
-    //controlador.actualizarVistaP();
-    // scanner2.close();
-    scanner2.nextLine(); // Consumir el salto de línea pendiente
-
-
-  
-
-  //ELIMINAR PROFESOR
-    System.out.print("Ingrese el nombre del profesor a eliminar: ");
-    Scanner scanner6 = new Scanner(System.in);
-    String nombreAEliminarP = scanner6.nextLine();
-    Profesor.eliminarProfesor(nombreAEliminarP);
-    System.out.println("Profesor eliminado: " + nombreAEliminarP);
-    //controlador.actualizarVistaP();
-    // scanner3.close();
-    // //Cerrar la conexión al final (opcional, ya que el programa termina aquí)
-    // try {
-    //   if (conexion != null && !conexion.isClosed()) {
-    //     conexion.close();
-    //     System.out.println("Conexión cerrada.");
-    //   }
-    // } catch (Exception e) {
-    //   System.out.println("Error al cerrar la conexión: " + e.getMessage());
-    // }
-
-
-
-    //---------------------------------------------------------------------------------------------------------------
-
-    
-
-
-    // AGREGAR CURSO DESDE CONSOLA
-    System.out.print("Ingrese el nombre del curso: ");
-    Scanner scanner7 = new Scanner(System.in);
-    String nombre7 = scanner.nextLine();
-    System.out.print("Ingrese la descripción del curso: ");
-    String descripcion = scanner7.nextLine();
-    Cursos curso = new Cursos(0,nombre, descripcion); // Asignar un ID único, por ejemplo, 0
-    Cursos.insertarCurso(curso);
-    System.out.println("Curso agregado: " + curso.getNombre() + " - Descripción: " + curso.getDescripcion());
-    scanner7.nextLine(); // Consumir el salto de línea pendiente
-
-    
-    
-    
-    //aCTUALIZAR CURSO DESDE CONSOLA
-    System.out.print("Ingrese el nombre del curso a actualizar: ");
-    Scanner scanner8 = new Scanner(System.in);
-    String nombreOriginalc = scanner8.nextLine();
-    System.out.print("Ingrese el nuevo nombre del curso: ");
-    String nuevoNombrec = scanner8.nextLine();
-    System.out.print("Ingrese la nueva descripción del curso: ");
-    String nuevaDescripcion = scanner8.nextLine();
-    scanner8.nextLine(); // Consumir el salto de línea pendiente
-
-    Cursos cursoActualizado = new Cursos();
-    Cursos.actualizarCurso(nombreOriginal, cursoActualizado);
-    System.out.println("Curso actualizado: " + cursoActualizado.getNombre() + " - Descripción: " + cursoActualizado.getDescripcion());
-    
-
-
-  //ELIMINAR CURSO
-    System.out.print("Ingrese el nombre del curso a eliminar: ");
-    Scanner scanner9 = new Scanner(System.in);
-    String nombreCursoAEliminar = scanner9.nextLine();
-    Cursos.eliminarCurso(nombreCursoAEliminar);
-    System.out.println("Curso eliminado: " + nombreCursoAEliminar);
-    //controlador.actualizarVistaP();
-    scanner9.close();
-    //Cerrar la conexión al final (opcional, ya que el programa termina aquí)
-    try {
-      if (conexion != null && !conexion.isClosed()) {
-        conexion.close();
-        System.out.println("Conexión cerrada.");
-      }
-    } catch (Exception e) {
-      System.out.println("Error al cerrar la conexión: " + e.getMessage());
+        scanner.close();
     }
 
+    // ======== MÉTODOS AUXILIARES ========
 
-   
-    //---------------------------------------------------------------------------------------------------------------
+    private static void menuEstudiantes(ControladorEstudiante ctrl, Scanner sc) {
+        int opcion;
+        do {
+            System.out.println("\n--- MENÚ ESTUDIANTES ---");
+            System.out.println("1. Insertar estudiante");
+            System.out.println("2. Listar estudiantes");
+            System.out.println("0. Volver");
+            System.out.print("Seleccione una opción: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
 
+            switch (opcion) {
+                case 1 -> {
+                    System.out.print("Nombre del estudiante: ");
+                    String nombre = sc.nextLine();
+                    System.out.print("Edad: ");
+                    int edad = sc.nextInt();
+                    sc.nextLine();
 
+                    Estudiante est = new Estudiante(nombre, edad);
+                    ctrl.agregarEstudiante(est);
+                }
+                case 2 -> ctrl.actualizarVista();
+                case 0 -> System.out.println("Volviendo al menú principal...");
+                default -> System.out.println("Opción no válida.");
+            }
+        } while (opcion != 0);
+    }
 
-// VOLVERE A CARGAR ESTE CODIGO PARA DESCARTAR COMMMIT RESTRUCTUACION FX
+    private static void menuProfesores(ControladorProfesor ctrl, Scanner sc) {
+        int opcion;
+        do {
+            System.out.println("\n--- MENÚ PROFESORES ---");
+            System.out.println("1. Insertar profesor");
+            System.out.println("2. Actualizar profesor");
+            System.out.println("3. Eliminar profesor");
+            System.out.println("4. Listar profesores");
+            System.out.println("0. Volver");
+            System.out.print("Seleccione una opción: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
 
+            switch (opcion) {
+                case 1 -> {
+                    System.out.print("Nombre del profesor: ");
+                    String nombre = sc.nextLine();
+                    System.out.print("Materia: ");
+                    String materia = sc.nextLine();
+
+                    Profesor prof = new Profesor(nombre, materia);
+                    ctrl.agregarProfesor(prof);
+                }
+                case 2 -> {
+                    System.out.print("Nombre actual del profesor: ");
+                    String nombreOriginal = sc.nextLine();
+                    System.out.print("Nuevo nombre: ");
+                    String nuevoNombre = sc.nextLine();
+                    System.out.print("Nueva materia: ");
+                    String nuevaMateria = sc.nextLine();
+
+                    Profesor profAct = new Profesor(nuevoNombre, nuevaMateria);
+                    ctrl.actualizarProfesor(nombreOriginal, profAct);
+                }
+                case 3 -> {
+                    System.out.print("Nombre del profesor a eliminar: ");
+                    String nombreEliminar = sc.nextLine();
+                    ctrl.eliminarProfesor(nombreEliminar);
+                }
+                case 4 -> ctrl.actualizarVistaP();
+                case 0 -> System.out.println("Volviendo al menú principal...");
+                default -> System.out.println("Opción no válida.");
+            }
+        } while (opcion != 0);
+    }
+
+    private static void menuCursos(ControladorCurso ctrl, Scanner sc) {
+        int opcion;
+        do {
+            System.out.println("\n--- MENÚ CURSOS ---");
+            System.out.println("1. Insertar curso");
+            System.out.println("2. Actualizar curso");
+            System.out.println("3. Eliminar curso");
+            System.out.println("0. Volver");
+            System.out.print("Seleccione una opción: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1 -> {
+                    System.out.print("Nombre del curso: ");
+                    String nombre = sc.nextLine();
+                    System.out.print("Créditos del curso: ");
+                    int creditos = sc.nextInt();
+                    sc.nextLine();
+
+                    Cursos cursoNuevo = new Cursos(nombre, creditos);
+                    Cursos.insertarCurso(cursoNuevo); // método del modelo
+                    System.out.println("Curso agregado: " + nombre);
+                }
+                case 2 -> {
+                    System.out.print("Nombre actual del curso: ");
+                    String nombreOriginal = sc.nextLine();
+                    System.out.print("Nuevo nombre del curso: ");
+                    String nuevoNombre = sc.nextLine();
+                    System.out.print("Nuevos créditos: ");
+                    int nuevosCreditos = sc.nextInt();
+                    sc.nextLine();
+
+                    Cursos cursoAct = new Cursos(nuevoNombre, nuevosCreditos);
+                    Cursos.actualizarCurso(nombreOriginal, cursoAct);
+                    System.out.println("Curso actualizado: " + nuevoNombre);
+                }
+                case 3 -> {
+                    System.out.print("Nombre del curso a eliminar: ");
+                    String nombreEliminar = sc.nextLine();
+                    Cursos.eliminarCurso(nombreEliminar);
+                    System.out.println("Curso eliminado: " + nombreEliminar);
+                }
+                case 0 -> System.out.println("Volviendo al menú principal...");
+                default -> System.out.println("Opción no válida.");
+            }
+        } while (opcion != 0);
+    }
 }
-}
 
-
-  
 

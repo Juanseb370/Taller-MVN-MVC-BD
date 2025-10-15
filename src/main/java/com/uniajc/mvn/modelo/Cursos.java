@@ -1,154 +1,98 @@
 package com.uniajc.mvn.modelo;
 
-import java.util.List;
+import java.sql.*;
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class Cursos {
     private int id;
     private String nombre;
-    private String descripcion;
-    
-    public Cursos() {
-    }
-    
-    public Cursos(int id, String nombre, String descripcion) {
-        this.id = id;
+    private int creditos;
+
+    public Cursos() {}
+
+    public Cursos(String nombre, int creditos) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
-    
-
-
-    public int getId() {
-        return id;
-    }
-    
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    public String getNombre() {
-        return nombre;
-    }
-    
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    
-    public String getDescripcion() {
-        return descripcion;
-    }
-    
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-    
-    @Override
-    public String toString() {
-        return "Cursos [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";
+        this.creditos = creditos;
     }
 
+    // Getters y setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-  
-   
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-  
+    public int getCreditos() { return creditos; }
+    public void setCreditos(int creditos) { this.creditos = creditos; }
 
+    // ====== MÉTODOS JDBC ======
 
-    // METODO PARA CREAR Y GUARDAR CURSO EN LA BASE DE DATOS
-    public boolean validarDatos() {
-        return nombre != null && !nombre.isEmpty() && descripcion != null && !descripcion.isEmpty();
-    }
+    public static void insertarCurso(Cursos c) {
+        String sql = "INSERT INTO curso (nombre, creditos) VALUES (?, ?)";
+        try (Connection con = ConexionBD.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-    //METODO PARA INSERTAR CURSO EN LA BASE DE DATOS
-    public static void insertarCurso(Cursos curso) {
-        if (curso == null || !curso.validarDatos()) {
-            System.out.println("Datos del curso no son validos.");
-            return;
-        }
+            ps.setString(1, c.getNombre());
+            ps.setInt(2, c.getCreditos());
+            ps.executeUpdate();
+            System.out.println(" Curso insertado correctamente.");
 
-        String sql = "INSERT INTO cursos (nombre, descripcion) VALUES (?, ?)";
-
-        try {
-            java.sql.Connection conn = ConexionDatabase.getConnection();
-            java.sql.PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, curso.getNombre());
-            pstmt.setString(2, curso.getDescripcion());
-            pstmt.executeUpdate();
-            System.out.println("Curso insertado exitosamente.");
-        } catch (Exception e) {
-            System.out.println("Error al insertar el curso: " + e.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(" Error al insertar curso: " + ex.getMessage());
         }
     }
 
+    public static void actualizarCurso(String nombreOriginal, Cursos c) {
+        String sql = "UPDATE curso SET nombre = ?, creditos = ? WHERE nombre = ?";
+        try (Connection con = ConexionBD.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
+            ps.setString(1, c.getNombre());
+            ps.setInt(2, c.getCreditos());
+            ps.setString(3, nombreOriginal);
+            ps.executeUpdate();
+            System.out.println(" Curso actualizado correctamente.");
 
-
-
-
-    // // Metodo para inscribir un estudiante al curso
-    // public void inscribirEstudiante(Estudiante estudiante) {
-    //     if (estudiante != null) {
-    //         System.out.println("Estudiante " + estudiante.getNombre() + " inscrito en el curso " + nombre);
-    //     } else {
-    //         System.out.println("No se puede inscribir un estudiante nulo.");
-    //     }
-    // }
-
-    // // Metodo para mostrar informacion del curso
-    // public void mostrarInformacion() {
-    //     System.out.println("ID del curso: " + id);
-    //     System.out.println("Nombre del curso: " + nombre);
-    //     System.out.println("Descripción del curso: " + descripcion);
-    // }
-
-
-    // METODO PARA ACTUALIZAR NOMBRE Y DESCRIPCION DEL CURSO EN LA BASE DE DATOS
-    public static void actualizarCurso(String nombreOriginal, Cursos cursoActualizado) {
-        if (cursoActualizado == null || !cursoActualizado.validarDatos()) {
-            System.out.println("Datos del curso no son validos.");
-            return;
+        } catch (SQLException ex) {
+            System.out.println(" Error al actualizar curso: " + ex.getMessage());
         }
+    }
 
-        String sql = "UPDATE cursos SET nombre = ?, descripcion = ? WHERE nombre = ?";
+    public static void eliminarCurso(String nombre) {
+        String sql = "DELETE FROM curso WHERE nombre = ?";
+        try (Connection con = ConexionBD.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-        try {
-            java.sql.Connection conn = ConexionDatabase.getConnection();
-            java.sql.PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, cursoActualizado.getNombre());
-            pstmt.setString(2, cursoActualizado.getDescripcion());
-            pstmt.setString(3, nombreOriginal);
-            int filasAfectadas = pstmt.executeUpdate();
-            if (filasAfectadas > 0) {
-                System.out.println("Curso actualizado exitosamente.");
-            } else {
-                System.out.println("No se encontró un curso con el nombre proporcionado.");
+            ps.setString(1, nombre);
+            ps.executeUpdate();
+            System.out.println("🗑 Curso eliminado correctamente.");
+
+        } catch (SQLException ex) {
+            System.out.println(" Error al eliminar curso: " + ex.getMessage());
+        }
+    }
+
+    public static List<Cursos> obtenerTodosLosCursos() {
+        List<Cursos> lista = new ArrayList<>();
+        String sql = "SELECT * FROM curso";
+
+        try (Connection con = ConexionBD.getConnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Cursos c = new Cursos();
+                c.setId(rs.getInt("id"));
+                c.setNombre(rs.getString("nombre"));
+                c.setCreditos(rs.getInt("creditos"));
+                lista.add(c);
             }
-        } catch (Exception e) {
-            System.out.println("Error al actualizar el curso: " + e.getMessage());
+
+        } catch (SQLException ex) {
+            System.out.println(" Error al obtener cursos: " + ex.getMessage());
         }
+
+        return lista;
     }
-    
-    // METODO PARA ELIMINAR CURSO DE LA BASE DE DATOS
-    public static void eliminarCurso(String nombreC) {
-        String sql = "DELETE FROM cursos WHERE nombre = ?";
-
-        try {
-            java.sql.Connection conn = ConexionDatabase.getConnection();
-            java.sql.PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, nombreC);
-            int filasAfectadas = pstmt.executeUpdate();
-            if (filasAfectadas > 0) {
-                System.out.println("Curso eliminado exitosamente.");
-            } else {
-                System.out.println("No se encontró un curso con el nombre proporcionado.");
-            }
-        } catch (Exception e) {
-            System.out.println("Error al eliminar el curso: " + e.getMessage());
-        }
-    }
-
-
-    
 }

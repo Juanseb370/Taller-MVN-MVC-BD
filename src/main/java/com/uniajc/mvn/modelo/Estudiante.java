@@ -1,160 +1,100 @@
 package com.uniajc.mvn.modelo;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Estudiante {
-  private String nombre;
-  private int edad;
-  private int id_estudiante;
+    private int id;
+    private String nombre;
+    private int edad;
 
+    // Constructor vacío
+    public Estudiante() {}
 
-  public Estudiante() {
-    
-  }
-
-
-  public Estudiante(String nombre, int edad, int id) {
-    this.nombre = nombre;
-    this.edad = edad;
-    this.id_estudiante = id;
-  }
-
-
- 
-
-  //AQUI ESTAN LOS GEETTER Y SETS
-  public int getId() {
-    return this.id_estudiante;
-  } 
-
-
-  public void setId(int id) {
-    this.id_estudiante = id;
-  }
-
-
-  public String getNombre() {
-    return this.nombre;
-  }
-
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
-
-  public int getEdad() {
-    return this.edad;
-  }
-
-  public void setEdad(int edad) {
-    this.edad = edad;
-  }
-
-
-
-  // METODO PARA CREAR Y GUARDAR ESTUDIANTE EN LA BASE DE DATOS
-  public static void insertarEstudiante(Estudiante estudiante) {
-
-    String sql = "INSERT INTO estudiante (nombre, edad) VALUES (?, ?)";
-
-
-    try {
-      Connection conexion = ConexionDatabase.getConnection();
-
-      PreparedStatement preparedStatement = conexion.prepareStatement(sql);
-      //PreparedStatement stmt = conexion.prepareStatement(sql);
-
-
-
-      //ESTOS SON LOS STMT
-      // stmt.setString(1, estudiante.getNombre());
-      // stmt.setInt(2, estudiante.getEdad());
-      // stmt.setInt(3, estudiante.getId());
-      // stmt.executeUpdate();
-
-
-
-      preparedStatement.setString(1, estudiante.getNombre());
-      preparedStatement.setInt(2, estudiante.getEdad());
-  
-      
-      
-      
-
-      // Ejecutar la sentencias SQL INSERT, UPDATE o DELETE
-      preparedStatement.executeUpdate();
-    } catch (Exception e) {
-      System.out.println("Error al insertar el estudiante: " + e.getMessage());
-      e.printStackTrace();
-    }
-  }
-
-
-  // METODO PARA LISTAR ESTUDIANTES
-
-  public static List<Estudiante> obtenerTodosLosEstudiantes() {
-
-    List<Estudiante> estudiantes = new ArrayList<>();
-
-    String sql = "SELECT nombre, edad FROM estudiante";
-
-    try {
-      Connection conexion = ConexionDatabase.getConnection();
-
-      // Crear un objeto Statement para ejecutar la consulta SQL
-      Statement statement = conexion.createStatement();
-
-      // Ejecutar la sentencias SQL SELECT
-      ResultSet resultSet = statement.executeQuery(sql);
-
-      // Recorrer los resultados y crear objetos Estudiante
-      while (resultSet.next()) {
-        String nombre = resultSet.getString("nombre");
-        int edad = resultSet.getInt("edad");
-        Estudiante estudiante = new Estudiante(nombre, edad, 0);
-        estudiantes.add(estudiante);
-      }
-
-    } catch (Exception e) {
-      System.out.println("Error al insertar el estudiante: " + e.getMessage());
-      e.printStackTrace();
+    // Constructor con parámetros
+    public Estudiante(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
     }
 
-    return estudiantes;
-  }
+    // Getters y setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-  // ACTUALIZAR ESTUDIANTE
-public static void actualizarEstudiante(String nombreOriginal, Estudiante estudianteActualizado) {
-    String sql = "UPDATE estudiante SET nombre = ?, edad = ? WHERE nombre = ?";
-    try {
-        Connection conexion = ConexionDatabase.getConnection();
-        PreparedStatement ps = conexion.prepareStatement(sql);
-        ps.setString(1, estudianteActualizado.getNombre());
-        ps.setInt(2, estudianteActualizado.getEdad());
-        ps.setString(3, nombreOriginal);
-        ps.executeUpdate();
-    } catch (Exception e) {
-        System.out.println("Error al actualizar el estudiante: " + e.getMessage());
+    public int getEdad() { return edad; }
+    public void setEdad(int edad) { this.edad = edad; }
+
+    // ====== MÉTODOS JDBC ======
+
+    public static void insertarEstudiante(Estudiante e) {
+        String sql = "INSERT INTO estudiante (nombre, edad) VALUES (?, ?)";
+        try (Connection con = ConexionBD.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, e.getNombre());
+            ps.setInt(2, e.getEdad());
+            ps.executeUpdate();
+            System.out.println(" Estudiante insertado correctamente.");
+
+        } catch (SQLException ex) {
+            System.out.println(" Error al insertar estudiante: " + ex.getMessage());
+        }
     }
-}
 
-//ELIMINAR ESTUDIANTE
+    public static void actualizarEstudiante(String nombreOriginal, Estudiante e) {
+        String sql = "UPDATE estudiante SET nombre = ?, edad = ? WHERE nombre = ?";
+        try (Connection con = ConexionBD.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-public static void eliminarEstudiante(String nombre) {
-    String sql = "DELETE FROM estudiante WHERE nombre = ?";
-    try {
-        Connection conexion = ConexionDatabase.getConnection();
-        PreparedStatement ps = conexion.prepareStatement(sql);
-        ps.setString(1, nombre);
-        ps.executeUpdate();
-    } catch (Exception e) {
-        System.out.println("Error al eliminar el estudiante: " + e.getMessage());
+            ps.setString(1, e.getNombre());
+            ps.setInt(2, e.getEdad());
+            ps.setString(3, nombreOriginal);
+            ps.executeUpdate();
+            System.out.println("✏ Estudiante actualizado correctamente.");
+
+        } catch (SQLException ex) {
+            System.out.println(" Error al actualizar estudiante: " + ex.getMessage());
+        }
     }
-}
+
+    public static void eliminarEstudiante(String nombre) {
+        String sql = "DELETE FROM estudiante WHERE nombre = ?";
+        try (Connection con = ConexionBD.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, nombre);
+            ps.executeUpdate();
+            System.out.println("️ Estudiante eliminado correctamente.");
+
+        } catch (SQLException ex) {
+            System.out.println(" Error al eliminar estudiante: " + ex.getMessage());
+        }
+    }
+
+    public static List<Estudiante> obtenerTodosLosEstudiantes() {
+        List<Estudiante> lista = new ArrayList<>();
+        String sql = "SELECT * FROM estudiante";
+
+        try (Connection con = ConexionBD.getConnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Estudiante e = new Estudiante();
+                e.setId(rs.getInt("id"));
+                e.setNombre(rs.getString("nombre"));
+                e.setEdad(rs.getInt("edad"));
+                lista.add(e);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(" Error al obtener estudiantes: " + ex.getMessage());
+        }
+
+        return lista;
+    }
 }

@@ -2,35 +2,40 @@ package com.uniajc.mvn.controlador;
 
 import java.util.List;
 
-import java.util.ArrayList;
-import com.uniajc.mvn.modelo.Cursos;
-
-
 public class ControladorCurso {
 
-
     public ControladorCurso() {
-
     }
-    //metodo para actualizar la vista de cursos
-    public void actualizarVistaCursos() {
 
+    // INSERTAR
+    public void agregarCurso(Cursos curso) {
+        Cursos.insertarCurso(curso);
+        System.out.println("✅ Curso agregado: " + curso.getNombre());
     }
-    //metodo para agregar un curso
-    public void agregarCurso() {
 
+    // ACTUALIZAR
+    public void actualizarCurso(String nombreOriginal, Cursos cursoActualizado) {
+        Cursos.actualizarCurso(nombreOriginal, cursoActualizado);
+        System.out.println("✏️ Curso actualizado: " + cursoActualizado.getNombre());
     }
-    //metodo para listar todos los cursos
+
+    // ELIMINAR
+    public void eliminarCurso(String nombre) {
+        Cursos.eliminarCurso(nombre);
+        System.out.println("🗑️ Curso eliminado: " + nombre);
+    }
+
+    // LISTAR
     public List<Cursos> listarTodosLosCursos() {
-        return new ArrayList<Cursos>();
-    }
-    //metodo para actualizar un curso
-    public void actualizarCurso() {
-
-    }
-    //metodo para eliminar un curso
-    public void eliminarCurso() {
-
+        return Cursos.obtenerTodosLosCursos();
     }
 
+    // Mostrar en consola (si deseas crear una VistaCurso luego)
+    public void actualizarVistaCursos() {
+        List<Cursos> cursos = listarTodosLosCursos();
+        cursos.forEach(c -> {
+            System.out.println("Curso: " + c.getNombre() + " | Créditos: " + c.getCreditos());
+        });
     }
+}
+
