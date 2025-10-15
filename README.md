@@ -136,3 +136,7 @@ controlador.eliminarEstudiante("Leo Messi");
 ---
 
 Para dudas o problemas, contacta al autor o revisa la documentación en el código fuente.
+
+
+
+TALLER REALIZADO POR SEBASTIAN ABADIA Y SEBASTIAN ALMENDRA
