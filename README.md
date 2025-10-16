@@ -1,6 +1,6 @@
 # Práctica Maven MVC con Base de Datos
 
-Este proyecto es una práctica de arquitectura MVC utilizando Java, Maven y conexión a base de datos MySQL.
+Este proyecto Realizado por JUAN SEBASTIAN ALMENDRA Y SEBASTIAN ABADIA es una práctica de arquitectura MVC utilizando Java, Maven y conexión a base de datos MySQL.
 
 ## Estructura del Proyecto
 
@@ -42,92 +42,51 @@ Este proyecto es una práctica de arquitectura MVC en Java usando Maven y MySQL.
 
 ---
 
-## `config.properties` (ejemplo)
+# Práctica Maven MVC con Base de Datos
 
-```
-URL=jdbc:mysql://localhost:3306/practicamvc
-USERNAME=root
-PASSWORD=Pancha2025
-```
+Proyecto de ejemplo que implementa la arquitectura MVC en Java usando Maven y una base de datos MySQL.
 
-Coloca este archivo en la raíz del proyecto cuando ejecutes la aplicación desde la línea de comando. En producción usa variables de entorno o un gestor de secretos.
+## Resumen
 
----
+- Lenguaje: Java 11+ (compatible con Java 8 en la mayoría de los casos).
+- Gestión de dependencias y build: Maven
+- UI: Swing (interfaz gráfica simple en `VentanaPrincipal`)
+- Estructura: `modelo`, `vista`, `controlador`
 
-## Documentación de clases
+Esta práctica sirve como ejemplo para aprender cómo organizar una aplicación Java con patrones básicos y cómo conectar operaciones CRUD sencillas a una base de datos MySQL.
 
-### `Main` (ubicación: `src/main/java/com/uniajc/mvn/Main.java`)
+## Estructura del proyecto (ubicaciones clave)
 
-Descripción:
-- Programa principal. Pide al usuario el `nombre` y `edad` por consola, crea un objeto `Estudiante`, instancia `ControladorEstudiante` y agrega el estudiante a la base.
+- `src/main/java/com/uniajc/mvn/` — Código fuente Java.
+  - `modelo` — Entidades y utilidades de acceso a datos (`ConexionDatabase`, `Estudiante`, `Profesor`, `Cursos`).
+  - `vista` — Clases que implementan la interfaz gráfica (`VentanaPrincipal`, `VistaEstudiante`, `VistaProfesor`).
+  - `controlador` — Lógica para coordinar `modelo` y `vista` (`ControladorEstudiante`, `ControladorProfesor`).
+- `src/main/resources/db.sql` — Script SQL para crear la estructura de la base de datos usada en la práctica.
+- `pom.xml` — Configuración de Maven.
 
-Flujo relevante:
-- Abre conexión a la base con `ConexionDatabase.getConnection()` (se recomienda verificar la conexión antes de pedir entrada si es necesario).
-- Usa `Scanner` para leer datos del usuario.
-- Crea `Estudiante estudiante = new Estudiante(nombre, edad, 0);` y lo pasa al `ControladorEstudiante`.
+## Requisitos previos
 
-Nota práctica:
-- Evita declarar la misma variable dos veces en un mismo bloque (posible error de "duplicate local variable"). Reusar la variable o usar nombres diferentes para cada instancia.
-- Cuando uses `scanner.nextInt()` seguido de `scanner.nextLine()`, consume el salto de línea pendiente con un `scanner.nextLine()` adicional si vas a leer más texto.
-
-Ejemplo de uso (resumen):
-- Ejecutar y seguir prompts en consola para insertar un registro.
-
----
-
-### `ConexionDatabase` (ubicación: `src/main/java/com/uniajc/mvn/modelo/ConexionDatabase.java`)
-
-Descripción:
-- Clase utilitaria que crea y mantiene una única conexión JDBC (`Connection`) a MySQL.
-- Lee `config.properties` (ruta relativa a la raíz del proyecto) y obtiene las propiedades `URL`, `USERNAME`, `PASSWORD`.
-
-Comportamiento y métodos:
-- `public static Connection getConnection()` — devuelve la conexión única (la crea si no existe). Carga el driver `com.mysql.cj.jdbc.Driver` y usa `DriverManager.getConnection(url, username, password)`.
-# Práctica Maven MVC con Base de Datos (Java + MySQL)
-
-Este proyecto es una práctica de arquitectura MVC (Modelo-Vista-Controlador) escrita en Java usando Maven y una base de datos MySQL.
-
-## Estructura del proyecto
-
-- `src/main/java/com/uniajc/mvn/` — Código fuente Java organizado en los paquetes `modelo`, `vista` y `controlador`.
-	- `modelo` — clases que representan entidades y manejan operaciones con la base de datos (`Estudiante`, `Profesor`, `ConexionDatabase`).
-	- `vista` — clases que muestran información por consola (`VistaEstudiante`, `VistaProfesor`).
-	- `controlador` — controladores que coordinan modelo y vista (`ControladorEstudiante`, `ControladorProfesor`).
-- `src/main/resources/db.sql` — script SQL para crear las tablas usadas en la práctica.
-- `config.properties` — archivo de configuración con los parámetros JDBC (no incluir credenciales reales en el repositorio).
-- `pom.xml` — definición del proyecto Maven y dependencias.
-
-## Resumen de clases clave
-
-- `Main` (`src/main/java/com/uniajc/mvn/Main.java`)
-	- Punto de entrada. Inicializa la conexión (llamando a `ConexionDatabase.getConnection()`), y contiene ejemplos de cómo insertar, actualizar y eliminar `Estudiante` y `Profesor` usando `Scanner` para entrada por consola.
-
-- `ConexionDatabase` (`src/main/java/com/uniajc/mvn/modelo/ConexionDatabase.java`)
-	- Clase utilitaria que crea y devuelve una conexión JDBC a MySQL leyendo `config.properties`.
-
-- `Estudiante` y `Profesor` (`src/main/java/com/uniajc/mvn/modelo/`)
-	- Modelos con métodos estáticos para operaciones CRUD: `insertar...`, `obtenerTodos...`, `actualizar...`, `eliminar...`.
-
-- `ControladorEstudiante` y `ControladorProfesor` (`src/main/java/com/uniajc/mvn/controlador/`)
-	- Coordinan entre los modelos y las vistas. Por ejemplo, `ControladorProfesor.actualizarVistaP()` obtiene la lista de profesores y delega la impresión a `VistaProfesor`.
+- Java JDK instalado (recomendado Java 11 o superior).
+- Maven instalado (para compilar y empaquetar).
+- MySQL o MariaDB disponible localmente o en red.
 
 ## Configuración de la base de datos
 
-La aplicación usa un archivo `config.properties` en la raíz del proyecto con las siguientes claves:
+La aplicación espera leer las credenciales y la URL de conexión desde un archivo `config.properties` ubicado en la raíz del proyecto (junto a `pom.xml`) o desde variables de entorno si decides modificar `ConexionDatabase`.
+
+Ejemplo de `config.properties` (NO incluya credenciales reales en el repositorio):
 
 ```
 URL=jdbc:mysql://localhost:3306/practicamvc
 USERNAME=root
-PASSWORD=tu_contraseña
+PASSWORD=tu_contraseña_aqui
 ```
 
-Recomendaciones:
-- No subir `config.properties` con credenciales reales: usa `config.properties.example` en su lugar y añade `config.properties` a `.gitignore`.
-- Alternativamente, modifica `ConexionDatabase` para leer variables de entorno en lugar de un archivo.
+Recomendación: crea `config.properties` a partir del archivo `config.properties.example` y agrega `config.properties` a `.gitignore`.
 
 ## Crear la base de datos y tablas
 
-Ejecuta el script SQL incluido para crear la base y las tablas (desde PowerShell):
+Importa el script SQL incluido para crear la base de datos y tablas. En PowerShell (Windows):
 
 ```powershell
 mysql -u root -p < "${PWD}\src\main\resources\db.sql"
@@ -135,73 +94,68 @@ mysql -u root -p < "${PWD}\src\main\resources\db.sql"
 
 Se te pedirá la contraseña del usuario MySQL.
 
-Nota: verifica que la URL en `config.properties` apunte a la base correcta (nombre de la BD y puerto).
+Si prefieres ejecutar manualmente las sentencias, abre `src/main/resources/db.sql` y ejecútalas en tu cliente MySQL.
 
-## Compilar y ejecutar (PowerShell)
+## Compilar y ejecutar
 
-Compilar con Maven:
+Desde PowerShell en la raíz del proyecto:
 
 ```powershell
 mvn clean package
+mvn -q -Dexec.mainClass="com.uniajc.mvn.Main" exec:java
 ```
 
-Ejecutar directamente desde Maven:
-
-```powershell
-mvn exec:java -Dexec.mainClass="com.uniajc.mvn.Main"
-```
-
-O ejecutar el JAR generado:
+O ejecuta el JAR generado (después de `mvn package`):
 
 ```powershell
 java -jar target\practica-mvn-mvc-bd-1.0-SNAPSHOT.jar
 ```
 
-## Uso desde consola (descripción breve)
+Nota: el proyecto actualmente abre una ventana Swing (`VentanaPrincipal`). Hay también un `Main` con la misma funcionalidad de arranque.
 
-El `Main` contiene código (algunas secciones comentadas) que pide entrada por consola para insertar/actualizar/eliminar estudiantes y profesores. Ejemplos:
+## Uso de la aplicación
 
-- Insertar profesor:
-	- Se solicita `nombre` y `materia` y se llama a `Profesor.insertarProfesor(...)`.
-- Actualizar profesor:
-	- Se solicita el `nombre` original y los nuevos datos, y se llama a `Profesor.actualizarProfesor(...)`.
-- Eliminar profesor:
-	- Se solicita el `nombre` y se llama a `Profesor.eliminarProfesor(...)`.
+- Interfaz gráfica: `VentanaPrincipal` contiene pestañas para Estudiantes, Profesores y Cursos.
+  - Estudiantes: agrega/actualiza/elimina usando el `ControladorEstudiante`.
+  - Profesores: operaciones directamente desde métodos estáticos de `Profesor`.
+  - Cursos: operaciones directamente desde métodos estáticos de `Cursos`.
 
-Ten en cuenta que el código actual usa búsquedas/actualizaciones por `nombre`, lo cual no es ideal en producción (mejor usar `id` como clave primaria estable).
+Observaciones:
+- Algunas operaciones (por ejemplo, `Profesor.insertarProfesor(...)`) usan métodos estáticos en las clases del modelo. Esto funciona para la práctica, pero en aplicaciones reales es preferible usar una capa DAO o servicios con inyección de dependencias.
+- Muchas operaciones usan `nombre` como clave para buscar/actualizar/eliminar. Es más robusto utilizar `id` (clave primaria) en las consultas.
 
-## Notas de seguridad y buenas prácticas
+## Seguridad y buenas prácticas
 
-- No incluyas credenciales en el repositorio. Usa `config.properties.example` o variables de entorno.
-- Recomendado: cambiar las operaciones para utilizar `id` (clave primaria auto-increment) en lugar de búsquedas por `nombre`.
-- Añadir manejo de excepciones más robusto y logging (`SLF4J` + `logback` / `log4j`) en lugar de `System.out.println`.
-- Cerrar `Scanner` y conexiones adecuadamente; evitar declarar múltiples `Scanner` sobre `System.in`.
+- No incluir `config.properties` con credenciales en el repositorio.
+- Preferir variables de entorno o un gestor de secretos en entornos de producción.
+- Validar y sanear cuidadosamente los datos de entrada si los recibes desde la UI o la red.
+- Manejar recursos (conexiones, statements, result sets) correctamente y cerrarlos en bloques `finally` o usar `try-with-resources`.
+- Añadir logging (SLF4J + Logback/Log4j2) en lugar de `System.out.println` o `JOptionPane` para errores de fondo.
 
-## Archivos sugeridos a agregar (próximos pasos)
+## Pruebas y mejoras recomendadas (próximos pasos)
 
-1. `config.properties.example` — plantilla sin credenciales. Ejemplo:
+- Añadir un `config.properties.example` y actualizar `.gitignore` para excluir el archivo real.
+- Refactorizar `Estudiante`, `Profesor` y `Cursos` para usar `id` en las operaciones CRUD y separar la lógica de acceso a datos en clases DAO.
+- Añadir pruebas unitarias e integración (por ejemplo con H2 en memoria o un contenedor Docker para MySQL).
+- Añadir manejo de transacciones cuando una operación afecte varias tablas.
+- Mejorar manejo de errores y mostrar mensajes más informativos en la UI.
 
-```
-URL=jdbc:mysql://localhost:3306/practicamvc
-USERNAME=root
-PASSWORD=
-```
+## Archivos sugeridos para añadir
 
-2. Actualizar `.gitignore` para excluir `config.properties`.
-3. Refactor: implementar una capa DAO para `Estudiante` y `Profesor` que use `id` para operaciones.
-4. Añadir pruebas unitarias para métodos del modelo usando una base de datos en memoria (H2) o pruebas de integración con Docker/MySQL.
+- `config.properties.example` — Plantilla sin credenciales.
+- `.gitignore` — Asegúrate de incluir `config.properties`.
 
-## Cómo puedo ayudarte más
+## ¿Necesitas que haga esto por ti?
 
 Puedo:
-
 - Generar `config.properties.example` y actualizar `.gitignore`.
-- Cambiar `ConexionDatabase` para leer desde `resources` o variables de entorno.
-- Refactorizar `Profesor`/`Estudiante` para usar `id` en vez de nombre en actualizaciones/eliminaciones.
-- Añadir pruebas unitarias o integración.
-
-
+- Refactorizar los modelos para usar `id` y crear DAOs.
+- Añadir pruebas automatizadas con JUnit y una base H2 para CI.
 
 ---
 
-_Archivo regenerado y limpiado el contenido duplicado. Si quieres que adapte el README a otro idioma o estilo (más minimalista o con secciones de desarrollo), dime cuál._
+Resumen de cambios realizados en este commit:
+- Reescritura y actualización del `README.md` con instrucciones claras en español, comandos para PowerShell y recomendaciones de seguridad y mejoras.
+
+Si quieres que continúe y cree `config.properties.example` y actualice `.gitignore`, dime y lo hago ahora.
+
