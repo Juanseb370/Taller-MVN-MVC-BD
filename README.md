@@ -33,6 +33,14 @@ USERNAME=root
 PASSWORD=Pancha2025
 # Práctica Maven MVC con Base de Datos
 
+
+# AQUI ESTAN LAS CONFIGURACION DEL ARCHIVO CONFIG.PROPERTIES PARA HACER CONEXION CON LA BASE DE DATOS DE NEONDB
+# Configuración de la base de datos del Taller
+postgresql://neondb_owner:npg_0npMkAd1HciP@ep-super-base-adds1fhl-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+URL=jdbc:postgresql://ep-super-base-adds1fhl-pooler.c-2.us-east-1.aws.neon.tech/neondb
+USERNAME=neondb_owner
+PASSWORD=npg_0npMkAd1HciP
+
 Este proyecto es una práctica de arquitectura MVC en Java usando Maven y MySQL. A continuación se documentan las clases principales, cómo se configura la conexión y cómo ejecutar la aplicación.
 
 ## Resumen de archivos importantes
