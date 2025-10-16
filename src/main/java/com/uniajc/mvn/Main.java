@@ -7,7 +7,7 @@ import com.uniajc.mvn.controlador.ControladorEstudiante;
 import com.uniajc.mvn.controlador.ControladorProfesor;
 
 import com.uniajc.mvn.modelo.ConexionDatabase;
-
+import com.uniajc.mvn.modelo.Cursos;
 import com.uniajc.mvn.modelo.Estudiante;
 import com.uniajc.mvn.modelo.Profesor;
 
@@ -123,17 +123,7 @@ public class Main {
      // AGREGAR PROFESOR DESDE CONSOLA
 
     System.out.print("Ingrese el nombre del profesor: ");
-<<<<<<< HEAD
-    Scanner scanner = new Scanner(System.in);
-    String nombre = scanner.nextLine();
-    System.out.print("Ingrese la materia del profesor: ");
-    String materia = scanner.nextLine();
-    Profesor profesor = new Profesor(nombre, materia,0); // Asignar un ID único, por ejemplo, 0
-    Profesor.insertarProfesor(profesor);
-    System.out.println("Profesor agregado: " + profesor.getNombre() + " - Materia: " + profesor.getMateria());
 
-    scanner.nextLine(); // Consumir el salto de línea pendiente
-=======
     Scanner scanner4 = new Scanner(System.in);
     String nombreP = scanner4.nextLine();
     System.out.print("Ingrese la materia del profesor: ");
@@ -143,7 +133,7 @@ public class Main {
     System.out.println("Profesor agregado: " + profesor.getNombre() + " - Materia: " + profesor.getMateria());
 
     scanner4.nextLine(); // Consumir el salto de línea pendiente
->>>>>>> b2d3350 (Revision y Correccion Main.java)
+
     // ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
     // controlador.agregarEstudiante(estudiante);
     // controlador.actualizarVista();
@@ -151,22 +141,6 @@ public class Main {
     
 
     //ACTUALIZAR PROFESOR DESDE CONSOLA
-<<<<<<< HEAD
-    System.out.print("Ingrese el nombre del profesor a actualizar: ");
-    Scanner scanner2 = new Scanner(System.in);
-    String nombreOriginal = scanner2.nextLine();
-    System.out.print("Ingrese el nuevo nombre del profesor: ");
-    String nuevoNombre = scanner2.nextLine();
-    System.out.print("Ingrese la nueva materia del profesor: ");
-    String nuevaMateria = scanner2.nextLine();
-    scanner2.nextLine(); // Consumir el salto de línea pendiente
-    Profesor profesorActualizado = new Profesor(nuevoNombre, nuevaMateria,0);
-    Profesor.actualizarProfesor(nombreOriginal, profesorActualizado);
-    System.out.println("Profesor actualizado: " + profesorActualizado.getNombre() + " - Materia: " + profesorActualizado.getMateria());
-    //controlador.actualizarVistaP();
-    // scanner2.close();
-    scanner2.nextLine(); // Consumir el salto de línea pendiente
-=======
 
     System.out.print("Ingrese el nombre del profesor a actualizar: ");
     Scanner scanner5 = new Scanner(System.in);
@@ -182,19 +156,12 @@ public class Main {
     //controlador.actualizarVistaP();
     // scanner2.close();
     scanner5.nextLine(); // Consumir el salto de línea pendiente
->>>>>>> b2d3350 (Revision y Correccion Main.java)
 
 
   
 
   //ELIMINAR PROFESOR
     System.out.print("Ingrese el nombre del profesor a eliminar: ");
-<<<<<<< HEAD
-    Scanner scanner3 = new Scanner(System.in);
-    String nombreAEliminar = scanner3.nextLine();
-    Profesor.eliminarProfesor(nombreAEliminar);
-    System.out.println("Profesor eliminado: " + nombreAEliminar);
-=======
     Scanner scanner6 = new Scanner(System.in);
     String nombreAEliminarP = scanner6.nextLine();
     Profesor.eliminarProfesor(nombreAEliminarP);
@@ -206,12 +173,6 @@ public class Main {
     // try {
     //   if (conexion != null && !conexion.isClosed()) {
     //     conexion.close();
-    //     System.out.println("Conexión cerrada.");
-    //   }
-    // } catch (Exception e) {
-    //   System.out.println("Error al cerrar la conexión: " + e.getMessage());
-    // }
-
 
 
     //---------------------------------------------------------------------------------------------------------------
@@ -254,7 +215,6 @@ public class Main {
     String nombreCursoAEliminar = scanner9.nextLine();
     Cursos.eliminarCurso(nombreCursoAEliminar);
     System.out.println("Curso eliminado: " + nombreCursoAEliminar);
->>>>>>> b2d3350 (Revision y Correccion Main.java)
     //controlador.actualizarVistaP();
     scanner9.close();
     //Cerrar la conexión al final (opcional, ya que el programa termina aquí)
@@ -271,7 +231,6 @@ public class Main {
 
     //---------------------------------------------------------------------------------------------------------------
 
-    
 
 
 
