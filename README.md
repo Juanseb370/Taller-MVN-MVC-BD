@@ -1,5 +1,103 @@
 # Práctica Maven MVC con Base de Datos
 
+Este repositorio es una práctica de arquitectura MVC en Java (Swing) usando Maven y una base de datos. Fue realizado por Juan Sebastián Almendra y Sebastián Abadía.
+
+## Resumen
+
+- Lenguaje: Java
+- Build: Maven
+- UI: Swing (ventana principal en `VentanaPrincipal`)
+- Estructura: paquetes `modelo`, `vista` y `controlador` bajo `src/main/java/com/uniajc/mvn/`
+
+## Estructura del proyecto
+
+- `src/main/java/com/uniajc/mvn/` — Código fuente (modelo, vista, controlador).
+- `src/main/resources/db.sql` — Script SQL para crear la base de datos/tablas usadas en la práctica.
+- `config.properties.example` — Plantilla con las propiedades de conexión a la base de datos (NO contiene credenciales reales).
+- `pom.xml` — Configuración de Maven.
+
+## Requisitos previos
+
+- Java JDK instalado (recomendado Java 11 o superior).
+- Maven instalado.
+- Base de datos compatible (MySQL/MariaDB o PostgreSQL según configuración). El proyecto lee la URL JDBC desde `config.properties` por defecto.
+
+## Configuración de la base de datos
+
+1. Copia `config.properties.example` a `config.properties` en la raíz del proyecto.
+2. Rellena los valores con los credenciales de tu base de datos. Ejemplo:
+
+```
+URL=jdbc:mysql://localhost:3306/practicamvc
+USERNAME=root
+PASSWORD=personal
+```
+
+# AQUI ESTAN LAS CONFIGURACION DEL ARCHIVO CONFIG.PROPERTIES PARA HACER CONEXION CON LA BASE DE DATOS DE NEONDB
+# Configuración de la base de datos del Taller
+postgresql://neondb_owner:npg_0npMkAd1HciP@ep-super-base-adds1fhl-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+URL=jdbc:postgresql://ep-super-base-adds1fhl-pooler.c-2.us-east-1.aws.neon.tech/neondb
+USERNAME=neondb_owner
+PASSWORD=npg_0npMkAd1HciP
+
+
+
+
+
+Nota: este proyecto fue desarrollado inicialmente pensando en MySQL, pero la cadena JDBC puede apuntar a PostgreSQL u otras bases compatibles si ajustas el driver en el `pom.xml`.
+
+### Importar esquema
+
+Si usas MySQL, importa el script con PowerShell desde la raíz del proyecto:
+
+```powershell
+# Importa la estructura y datos de ejemplo (se te pedirá la contraseña de MySQL)
+mysql -u root -p < "${PWD}\src\main\resources\db.sql"
+```
+
+Si prefieres, abre `src/main/resources/db.sql` y ejecuta las sentencias desde tu cliente de base de datos.
+
+## Compilar y ejecutar
+
+Desde PowerShell en la raíz del proyecto:
+
+```powershell
+mvn clean package
+mvn -q -Dexec.mainClass="com.uniajc.mvn.Main" exec:java
+```
+
+O ejecutar el JAR generado después de `mvn package`:
+
+```powershell
+java -jar target\practica-mvn-mvc-bd-1.0-SNAPSHOT.jar
+```
+
+La aplicación abrirá una ventana Swing (`VentanaPrincipal`) con pestañas para gestionar Estudiantes, Profesores y Cursos.
+
+## Seguridad y buenas prácticas
+
+- No subas `config.properties` con credenciales reales al repositorio. Usa `config.properties.example` como plantilla.
+- Considera usar variables de entorno o un gestor de secretos en entornos de producción.
+- Cierra correctamente recursos de base de datos (usar try-with-resources) y añade logging en lugar de prints para producción.
+
+## Qué he añadido en esta revisión
+
+- `config.properties.example` — plantilla sin credenciales.
+- `.gitignore` — reglas básicas para evitar subir credenciales y artefactos de compilación.
+- README reorganizado, pasos claros de configuración, importación de esquema y ejecución.
+
+## Próximos pasos sugeridos (opcionales)
+
+- Añadir pruebas unitarias e integración (por ejemplo con H2 en memoria).
+- Refactorizar acceso a datos en DAOs y usar identificadores (`id`) en lugar de `nombre` para operaciones CRUD.
+- Soportar lectura de variables de entorno si `config.properties` no existe.
+
+Si quieres que haga alguna de estas mejoras, dímelo y la implemento.
+
+---
+
+TALLER REALIZADO POR SEBASTIAN ABADIA Y SEBASTIAN ALMENDRA# Práctica Maven MVC con Base de Datos
+
 Este proyecto Realizado por JUAN SEBASTIAN ALMENDRA Y SEBASTIAN ABADIA es una práctica de arquitectura MVC utilizando Java, Maven y conexión a base de datos MySQL.
 
 ## Estructura del Proyecto
