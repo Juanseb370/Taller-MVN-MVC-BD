@@ -3,6 +3,7 @@ package com.uniajc.mvn.modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
@@ -10,16 +11,33 @@ import java.util.ArrayList;
 public class Estudiante {
   private String nombre;
   private int edad;
+  private int id_estudiante;
+
 
   public Estudiante() {
-    this.nombre = "";
-    this.edad = 0;
+    
   }
 
-  public Estudiante(String nombre, int edad) {
+
+  public Estudiante(String nombre, int edad, int id) {
     this.nombre = nombre;
     this.edad = edad;
+    this.id_estudiante = id;
   }
+
+
+ 
+
+  //AQUI ESTAN LOS GEETTER Y SETS
+  public int getId() {
+    return this.id_estudiante;
+  } 
+
+
+  public void setId(int id) {
+    this.id_estudiante = id;
+  }
+
 
   public String getNombre() {
     return this.nombre;
@@ -37,17 +55,36 @@ public class Estudiante {
     this.edad = edad;
   }
 
+
+
+  // METODO PARA CREAR Y GUARDAR ESTUDIANTE EN LA BASE DE DATOS
   public static void insertarEstudiante(Estudiante estudiante) {
 
     String sql = "INSERT INTO estudiante (nombre, edad) VALUES (?, ?)";
+
 
     try {
       Connection conexion = ConexionDatabase.getConnection();
 
       PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+      //PreparedStatement stmt = conexion.prepareStatement(sql);
+
+
+
+      //ESTOS SON LOS STMT
+      // stmt.setString(1, estudiante.getNombre());
+      // stmt.setInt(2, estudiante.getEdad());
+      // stmt.setInt(3, estudiante.getId());
+      // stmt.executeUpdate();
+
+
 
       preparedStatement.setString(1, estudiante.getNombre());
       preparedStatement.setInt(2, estudiante.getEdad());
+  
+      
+      
+      
 
       // Ejecutar la sentencias SQL INSERT, UPDATE o DELETE
       preparedStatement.executeUpdate();
@@ -55,8 +92,10 @@ public class Estudiante {
       System.out.println("Error al insertar el estudiante: " + e.getMessage());
       e.printStackTrace();
     }
-
   }
+
+
+  // METODO PARA LISTAR ESTUDIANTES
 
   public static List<Estudiante> obtenerTodosLosEstudiantes() {
 
@@ -67,15 +106,17 @@ public class Estudiante {
     try {
       Connection conexion = ConexionDatabase.getConnection();
 
+      // Crear un objeto Statement para ejecutar la consulta SQL
       Statement statement = conexion.createStatement();
 
       // Ejecutar la sentencias SQL SELECT
       ResultSet resultSet = statement.executeQuery(sql);
 
+      // Recorrer los resultados y crear objetos Estudiante
       while (resultSet.next()) {
         String nombre = resultSet.getString("nombre");
         int edad = resultSet.getInt("edad");
-        Estudiante estudiante = new Estudiante(nombre, edad);
+        Estudiante estudiante = new Estudiante(nombre, edad, 0);
         estudiantes.add(estudiante);
       }
 
@@ -87,4 +128,33 @@ public class Estudiante {
     return estudiantes;
   }
 
+
+  // ACTUALIZAR ESTUDIANTE
+public static void actualizarEstudiante(String nombreOriginal, Estudiante estudianteActualizado) {
+    String sql = "UPDATE estudiante SET nombre = ?, edad = ? WHERE nombre = ?";
+    try {
+        Connection conexion = ConexionDatabase.getConnection();
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setString(1, estudianteActualizado.getNombre());
+        ps.setInt(2, estudianteActualizado.getEdad());
+        ps.setString(3, nombreOriginal);
+        ps.executeUpdate();
+    } catch (Exception e) {
+        System.out.println("Error al actualizar el estudiante: " + e.getMessage());
+    }
+}
+
+//ELIMINAR ESTUDIANTE
+
+public static void eliminarEstudiante(String nombre) {
+    String sql = "DELETE FROM estudiante WHERE nombre = ?";
+    try {
+        Connection conexion = ConexionDatabase.getConnection();
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setString(1, nombre);
+        ps.executeUpdate();
+    } catch (Exception e) {
+        System.out.println("Error al eliminar el estudiante: " + e.getMessage());
+    }
+}
 }
