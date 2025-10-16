@@ -250,10 +250,10 @@ public class VentanaPrincipal extends JFrame {
         return panel;
     }
 
-    // ---------------- MAIN ----------------
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new VentanaPrincipal().setVisible(true);
-        });
-    }
-}
+//     // ---------------- MAIN ----------------
+//     public static void main(String[] args) {
+//         SwingUtilities.invokeLater(() -> {
+//             new VentanaPrincipal().setVisible(true);
+//         });
+//     }
+ }
