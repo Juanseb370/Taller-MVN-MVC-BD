@@ -154,8 +154,8 @@ Puedo:
 
 ---
 
-Resumen de cambios realizados en este commit:
-- Reescritura y actualización del `README.md` con instrucciones claras en español, comandos para PowerShell y recomendaciones de seguridad y mejoras.
+Para dudas o problemas, contacta al autor o revisa la documentación en el código fuente.
 
-Si quieres que continúe y cree `config.properties.example` y actualice `.gitignore`, dime y lo hago ahora.
 
+
+TALLER REALIZADO POR SEBASTIAN ABADIA Y SEBASTIAN ALMENDRA
